@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hide-horizontal-scrollbar {
+  overflow: auto;
+}
+
+.hide-horizontal-scrollbar::-webkit-scrollbar {
+  height: 0px;
+}
+
+.hide-horizontal-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-horizontal-scrollbar::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+/* Add this to your global CSS file or a CSS module */
+.container-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+
+.container-carousel.hide-horizontal-scrollbar::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar */
+}
+
+.container-carousel.hide-horizontal-scrollbar {
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.container-carousel.animate-left,
+.container-carousel.animate-right {
+  transition: transform 0.5s ease-in-out; /* Add smooth transition */
+}
+
+.container-carousel.animate-left {
+  transform: translateX(-100%); /* Slide left */
+}
+
+.container-carousel.animate-right {
+  transform: translateX(100%); /* Slide right */
+}
+
+.scrollbar-vertical-thin {
+  overflow-y: scroll;
+}
+
+.scrollbar-vertical-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-vertical-thin::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.scrollbar-vertical-thin::-webkit-scrollbar-thumb {
+  background-color: #1c5356;
+  border-radius: 10px;
+}
+
+.scrollbar-vertical-thin::-webkit-scrollbar-thumb:hover {
+  background: #1c5356;
+}
+
+/* Initial state of the checkbox */
+.checkbox-custom {
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #1c5356;
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
+}
+
+/* Styling the checkbox when it is checked */
+.checkbox-custom:checked {
+  background-color: #ffba35;
+}
+
+/* Styling the custom checkmark */
+.checkbox-custom:checked::before {
+  content: "\2714"; /* Unicode for checkmark */
+  color: #1c5356;
+  font-size: 10px;
+  position: absolute;
+  top: -1px;
+  left: 1px;
+}
+
+.range-container {
+  position: relative;
+  width: 210px;
+  height: 24px;
+}
+
+.range-track {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  height: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #d9d9d9;
+  border-radius: 2px;
+}
+
+.range-progress {
+  position: absolute;
+  height: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1c5356;
+  border-radius: 4px;
+}
+
+.range-thumb {
+  position: absolute;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  transform: translateY(-50%);
+}
+
+.range-thumb-inner {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+}
+
+.range-thumb-inner-circle {
+  width: 14px;
+  height: 14px;
+  background: #424e82;
+  border-radius: 50%;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  outline: none;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  height: 24px;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  height: 24px;
+}
+
+input[type="range"]::-moz-range-track {
+  -moz-appearance: none;
+  height: 24px;
+}
+
+input[type="range"]::-ms-track {
+  appearance: none;
+  height: 24px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 24px;
+  width: 24px;
+  background-color: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+input[type="range"]::-moz-range-thumb {
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  background-color: transparent;
+  pointer-events: auto;
+}
+
+input[type="range"]::-ms-thumb {
+  border: none;
+  outline: none;
+  appearance: none;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  background-color: transparent;
+  pointer-events: auto;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+  background-color: none;
+}
+
+input[type="range"]:focus::-moz-range-thumb {
+  border: none;
+  outline: none;
+}
+
+input[type="range"]:active::-moz-range-thumb {
+  border: none;
+  outline: none;
+}
+
+.rt90 {
+  transform: rotate(90deg);
+}
