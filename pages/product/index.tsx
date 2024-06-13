@@ -26,6 +26,7 @@ const productData = [
 
 const Index = () => {
   const [index, setIndex] = useState(0);
+  const [showData, setShowData] = useState(0);
 
   const handlePrev = () => {
     if (index == 0) {
@@ -164,45 +165,130 @@ const Index = () => {
       </div>
       <div className="py-8 w-4/5 mx-auto flex flex-col gap-6 justify-center">
         <div className="flex gap-4 justify-center items-center">
-          <button className="rounded-full justify-center bg-[#FFBA35] flex items-center text-[#1C5356]  font-semibold text-base p-2 sm:p-3 px-5 h-fit">
+          <button
+            onClick={() => setShowData(0)}
+            className={`rounded-full justify-center ${
+              showData === 0 ? "bg-[#FFBA35]" : "border border-[#cdcdcc]"
+            }  flex items-center text-[#1C5356]  font-semibold text-base p-2 sm:p-3 px-5 h-fit`}
+          >
             Description
           </button>
-          <button className="rounded-full  flex items-center text-[#1C5356] border border-[#cdcdcc] font-semibold text-base p-2 sm:p-3 px-5 h-fit">
+          <button
+            onClick={() => setShowData(1)}
+            className={`rounded-full justify-center ${
+              showData === 1 ? "bg-[#FFBA35]" : "border border-[#cdcdcc]"
+            }  flex items-center text-[#1C5356]  font-semibold text-base p-2 sm:p-3 px-5 h-fit`}
+          >
             Additional Information
           </button>
         </div>
-        <div className="flex flex-col gap-2 justify-center w-full sm:w-4/5 mx-auto">
-          <span className="text-sm font-medium text-[#515151]">
-            The Ant Esports ICE-590TG Gaming Cabinet is a true marvel for gamers
-            and enthusiasts seeking the ultimate blend of style, performance,
-            and customization. This meticulously designed cabinet boasts a
-            remarkable cooling system, featuring four pre-installed 120mm ARGB
-            fans that illuminate your gaming setup with mesmerizing colors. With
-            the capacity to accommodate a whopping twelve 120mm fans in total,
-            the ICE-590TG ensures your rig stays cool even during the most
-            intense gaming sessions. Versatility is at the heart of this gaming
-            cabinet, offering flexibility in storage configurations. Seamlessly
-            fitting up to three HDDs and one SSD, or three SSDs and one HDD, it
-            ensures your storage needs are effortlessly met. The support for
-            EATX motherboards opens up a world of possibilities for
-            high-performance setups, while the ability to house a 360mm radiator
-            on top allows for advanced liquid cooling solutions. CPU air coolers
-            up to 164mm in height find a perfect home here, providing efficient
-            cooling for your high-performance processors.
-          </span>
-          <Image className="w-full " src={productdesc} alt="" />
-          <span className="text-sm font-medium text-[#515151]">
-            Incorporating a thoughtful design for optimal airflow, the ICE-590TG
-            showcases side vents that enhance ventilation, keeping your
-            components running at peak efficiency. This cabinet isn't just a
-            powerhouse – it's a visual spectacle too. With its sleek aesthetics,
-            tempered glass side panel, and the play of dynamic RGB lighting,
-            your gaming setup will be the envy of all. Elevate your gaming
-            experience with the Ant Esports ICE-590TG Gaming Cabinet, where
-            innovation meets style, and performance knows no bounds.
-          </span>
-          <Image className="w-full " src={productsdesc} alt="" />
-        </div>
+        <span className="border border-[#D9D9D9] w-full my-2"></span>
+        {showData === 0 && (
+          <div className="flex flex-col gap-2 justify-center w-full sm:w-4/5 mx-auto">
+            <span className="text-sm font-medium text-[#515151]">
+              The Ant Esports ICE-590TG Gaming Cabinet is a true marvel for
+              gamers and enthusiasts seeking the ultimate blend of style,
+              performance, and customization. This meticulously designed cabinet
+              boasts a remarkable cooling system, featuring four pre-installed
+              120mm ARGB fans that illuminate your gaming setup with mesmerizing
+              colors. With the capacity to accommodate a whopping twelve 120mm
+              fans in total, the ICE-590TG ensures your rig stays cool even
+              during the most intense gaming sessions. Versatility is at the
+              heart of this gaming cabinet, offering flexibility in storage
+              configurations. Seamlessly fitting up to three HDDs and one SSD,
+              or three SSDs and one HDD, it ensures your storage needs are
+              effortlessly met. The support for EATX motherboards opens up a
+              world of possibilities for high-performance setups, while the
+              ability to house a 360mm radiator on top allows for advanced
+              liquid cooling solutions. CPU air coolers up to 164mm in height
+              find a perfect home here, providing efficient cooling for your
+              high-performance processors.
+            </span>
+            <Image className="w-full " src={productdesc} alt="" />
+            <span className="text-sm font-medium text-[#515151]">
+              Incorporating a thoughtful design for optimal airflow, the
+              ICE-590TG showcases side vents that enhance ventilation, keeping
+              your components running at peak efficiency. This cabinet isn't
+              just a powerhouse – it's a visual spectacle too. With its sleek
+              aesthetics, tempered glass side panel, and the play of dynamic RGB
+              lighting, your gaming setup will be the envy of all. Elevate your
+              gaming experience with the Ant Esports ICE-590TG Gaming Cabinet,
+              where innovation meets style, and performance knows no bounds.
+            </span>
+            <Image className="w-full " src={productsdesc} alt="" />
+          </div>
+        )}
+        {showData === 1 && (
+          <div className="flex border border-[#cececf] rounded-lg flex-col gap-2 justify-center w-full sm:w-4/5 mx-auto">
+            <table className="min-w-full rounded-lg border-collapse border border-[#cececf] overflow-hidden">
+              <thead className="bg-[#febb35]">
+                <tr>
+                  <th className="p-2 font-medium text-left px-6">Feature</th>
+                  <th className="p-2 font-medium text-left">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="text-sm ">
+                  <td className="p-2 px-6 font-medium">
+                    Dimension (L x W x H)
+                  </td>
+                  <td className="p-2">
+                    Chassis Size: 365 x 200 x 456 mm
+                    <br />
+                    Packing Size: 490 x 247 x 420 mm
+                  </td>
+                </tr>
+                <tr className="text-sm bg-[#F3F3F3]">
+                  <td className="p-2 px-6 font-medium">Motherboard Type</td>
+                  <td className="p-2">ATX, Micro-ATX, Mini-ITX</td>
+                </tr>
+                <tr className="text-sm ">
+                  <td className="p-2 px-6 font-medium">
+                    Liquid Cooling Support
+                  </td>
+                  <td className="p-2">
+                    Front: 240/280 mm <br /> Rear: None <br /> Top: None
+                  </td>
+                </tr>
+                <tr className="text-sm bg-[#F3F3F3]">
+                  <td className="p-2 px-6 font-medium">Pre-Installed Fans</td>
+                  <td className="p-2">
+                    Front: x2 <br />
+                    Rear: x1
+                  </td>
+                </tr>
+                <tr className="text-sm ">
+                  <td className="p-2 px-6 font-medium">
+                    Dimension (L x W x H)
+                  </td>
+                  <td className="p-2">
+                    Chassis Size: 365 x 200 x 456 mm
+                    <br />
+                    Packing Size: 490 x 247 x 420 mm
+                  </td>
+                </tr>
+                <tr className="text-sm bg-[#F3F3F3]">
+                  <td className="p-2 px-6 font-medium">Motherboard Type</td>
+                  <td className="p-2">ATX, Micro-ATX, Mini-ITX</td>
+                </tr>
+                <tr className="text-sm ">
+                  <td className="p-2 px-6 font-medium">
+                    Liquid Cooling Support
+                  </td>
+                  <td className="p-2">ATX, Micro-ATX, Mini-ITX</td>
+                </tr>
+                <tr className="text-sm bg-[#F3F3F3]">
+                  <td className="p-2 px-6 font-medium">Motherboard Type</td>
+                  <td className="p-2">
+                    Front: 240/280 mm <br />
+                    Rear: None <br />
+                    Top: None
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
       <Related />
       <Label />

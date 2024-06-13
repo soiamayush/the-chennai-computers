@@ -16,7 +16,7 @@ const PageDetails = ({ title, tag, isSearch }: any) => {
         </div>
       )}
       <span className="font-semibold text-2xl text-center">{title}</span>
-      <span className="text-sm text-[#4D4D4D] font-semibold cursor-pointer">
+      <span className="text-sm text-[#4D4D4D] text-center font-semibold cursor-pointer">
         {tag}
       </span>
     </div>
