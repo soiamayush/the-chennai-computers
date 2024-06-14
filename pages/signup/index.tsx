@@ -6,8 +6,15 @@ import logo from "@/public/logo.svg";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import google from "@/public/google.svg";
+import { useRouter } from "next/navigation";
+
 const index = () => {
+  const router = useRouter();
   const [pvisible, setPVisible] = useState(false);
+
+  const handleSignup = () => {
+    router.push("/");
+  };
   return (
     <div className="flex gap-4 justify-between p-6">
       <div className="hidden sm:flex w-1/2 max-h-screen overflow-y-auto">
@@ -67,7 +74,11 @@ const index = () => {
               </div>
             </div>
           </div>
-          <button className="bg-[#1C5356] rounded-lg flex items-center justify-center text-white font-semibold text-base p-2">
+
+          <button
+            onClick={handleSignup}
+            className="bg-[#1C5356] rounded-lg flex items-center justify-center text-white font-semibold text-base p-2"
+          >
             Sign Up
           </button>
           <div className="cursor-pointer border border-[#C9C9C9] rounded-lg p-2 flex justify-center items-center gap-2">
@@ -76,7 +87,10 @@ const index = () => {
               Sign up With Google
             </span>
           </div>
-          <span className="text-base w-full justify-center flex gap-2">
+          <span
+            onClick={() => router.push("/login")}
+            className="text-base w-full justify-center flex gap-2"
+          >
             Already have an account?
             <span className="text-[#1C5356] underline font-semibold cursor-pointer">
               Sign in

@@ -3,7 +3,13 @@ import Image from "next/image";
 import React from "react";
 import authbg1 from "@/public/authbg1.svg";
 import logo from "@/public/logo.svg";
+import { useRouter } from "next/navigation";
 const index = () => {
+  const router = useRouter();
+
+  const onSubmit = () => {
+    router.push("/");
+  };
   return (
     <div className="flex gap-4 justify-between p-6">
       <div className="hidden sm:flex w-1/2 max-h-screen overflow-y-auto">
@@ -35,13 +41,19 @@ const index = () => {
             />
           </div>
 
-          <button className="bg-[#1C5356] rounded-lg flex items-center justify-center text-white font-semibold text-base p-2">
+          <button
+            onClick={onSubmit}
+            className="bg-[#1C5356] rounded-lg flex items-center justify-center text-white font-semibold text-base p-2"
+          >
             Submit
           </button>
 
           <span className="text-base w-full justify-center flex gap-2">
             Remember Password?
-            <span className="text-[#1C5356] underline font-semibold cursor-pointer">
+            <span
+              onClick={() => router.push("/login")}
+              className="text-[#1C5356] underline font-semibold cursor-pointer"
+            >
               Sign in
             </span>
           </span>

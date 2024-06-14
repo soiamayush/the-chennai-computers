@@ -9,6 +9,7 @@ import gpu from "@/public/gpu.svg";
 import cpu from "@/public/cpu.svg";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
+import { useRouter } from "next/navigation";
 
 const index = () => {
   const truncateText = (text: string, maxLength: number) => {
@@ -17,6 +18,12 @@ const index = () => {
     }
     return text;
   };
+
+  const handleCoupon = () => {};
+
+  const handleRemove = () => {};
+
+  const navigate = useRouter();
   return (
     <div>
       <CustomeNavbar />
@@ -36,11 +43,15 @@ const index = () => {
               <tbody>
                 <tr className="text-sm">
                   <td className="p-2 flex items-center gap-2">
-                    <CloseIcon className="cursor-pointer" />
+                    <CloseIcon
+                      className="cursor-pointer"
+                      onClick={() => handleRemove()}
+                    />
                     <div className="flex items-center gap-2">
                       <div
-                        className="flex items-center justify-center bg-[#f5f5f5] rounded-xl cursor-pointer"
+                        className="flex items-center justify-center  bg-[#f5f5f5] rounded-xl cursor-pointer"
                         style={{ height: "50px", width: "50px" }}
+                        onClick={() => navigate.push("/product")}
                       >
                         <Image
                           src={cpu}
@@ -50,7 +61,11 @@ const index = () => {
                           className="object-contain"
                         />
                       </div>
-                      <div className="flex flex-col justify-between gap-1 w-4/5">
+
+                      <div
+                        className="flex flex-col justify-between gap-1 w-4/5 cursor-pointer"
+                        onClick={() => navigate.push("/product")}
+                      >
                         <span className="text-sm text-[#969696]">Cabinet</span>
                         <span className="text-base text-black">
                           {truncateText(
@@ -174,7 +189,10 @@ const index = () => {
               ₹10,450
             </span>
           </div>
-          <button className="bg-[#FFBA35] text-base text-[#1C5356] flex items-center justify-center p-2 rounded-full font-semibold">
+          <button
+            onClick={() => navigate.push("/checkout")}
+            className="bg-[#FFBA35] text-base text-[#1C5356] flex items-center justify-center p-2 rounded-full font-semibold"
+          >
             Proceed to Checkout
           </button>
         </div>
@@ -186,12 +204,14 @@ const index = () => {
             className="p-3 rounded-full h-fit  flex items-center justify-center focus:outline-none text-sm text-[#afafaf] border-[#afafaf] border"
             placeholder="Enter Coupon Code"
           />
-          <button className="bg-[#1C5356] h-fit w-fit  text-[#ffffff] flex items-center justify-center p-3 rounded-full text-sm font-semibold">
+          <button
+            onClick={handleCoupon}
+            className="bg-[#1C5356] h-fit w-fit  text-[#ffffff] flex items-center justify-center p-3 rounded-full text-sm font-semibold"
+          >
             Apply Coupon
           </button>
         </div>
         <div className="flex md:hidden border border-collapse h-fit border-[#cececf] rounded-lg  flex-col gap-3 p-3">
-          {" "}
           <span className="text-base font-semibold ">Order Summary</span>
           <div className="border w-full border-[#cececf]"></div>
           <div className="flex justify-between gap-3">

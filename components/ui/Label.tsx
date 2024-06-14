@@ -7,7 +7,6 @@ import Image from "next/image";
 const Label = () => {
   return (
     <div>
-      {" "}
       <div className="flex justify-between sm:px-16 p-6 gap-3 flex-wrap gap-y-4 ">
         <div className="flex gap-3 items-center">
           <div className="relative">

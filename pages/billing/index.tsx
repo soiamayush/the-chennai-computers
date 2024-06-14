@@ -8,6 +8,7 @@ import CustomeNavbar from "@/components/ui/CustomeNavbar";
 import Footer from "@/components/ui/Footer";
 import Label from "@/components/ui/Label";
 import PageDetails from "@/components/ui/PageDetails";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 <style jsx global>{`
@@ -38,6 +39,7 @@ import React from "react";
 `}</style>;
 
 const index = () => {
+  const navigate = useRouter();
   return (
     <div>
       <CustomeNavbar />
@@ -94,7 +96,10 @@ const index = () => {
               ₹10,450
             </span>
           </div>
-          <button className="bg-[#FFBA35] text-base text-[#1C5356] flex items-center justify-center p-2 rounded-full font-semibold">
+          <button
+            onClick={() => navigate.push("/ordercomplete")}
+            className="bg-[#FFBA35] text-base text-[#1C5356] flex items-center justify-center p-2 rounded-full font-semibold"
+          >
             Confirm payment
           </button>
         </div>

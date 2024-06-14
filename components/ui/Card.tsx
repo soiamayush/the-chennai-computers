@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Card = ({ cardData }: any) => {
   const truncate = (input: string) => {
@@ -8,8 +9,13 @@ const Card = ({ cardData }: any) => {
     }
     return input;
   };
+
+  const router = useRouter();
   return (
-    <div className="flex flex-col min-w-60 w-60 cursor-pointer">
+    <div
+      className="flex flex-col min-w-60 w-60 cursor-pointer"
+      onClick={() => router.push("/product")}
+    >
       <div className="relative">
         <Image src={cardData.image} className="" alt="" />
       </div>

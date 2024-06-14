@@ -1,9 +1,14 @@
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const FeaturedCard = ({ card }: any) => {
+  const router = useRouter();
   return (
-    <div className="flex gap-2 justify-center items-center flex-col">
+    <div
+      className="flex gap-2 justify-center items-center flex-col"
+      onClick={() => router.push("/product")}
+    >
       <div className="bg-[#F5F5F5] rounded-full cursor-pointer flex items-center justify-center aspect-square w-48 h-48 p-4">
         <Image src={card.image} alt="" className=" w-3/4 h-3/4 object-cover" />
       </div>

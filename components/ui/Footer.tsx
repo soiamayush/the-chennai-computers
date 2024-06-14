@@ -3,11 +3,16 @@ import logo from "@/public/logo.svg";
 import Image from "next/image";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import EmailIcon from "@mui/icons-material/Email";
+import { useRouter } from "next/navigation";
 
 const Footer = () => {
+  const navigate = useRouter();
   return (
     <div className=" pt-6">
-      <div className="border-y border-y-[#D9D9D9]  w-[90%] mx-auto flex justify-center">
+      <div
+        onClick={() => navigate.push("/")}
+        className="border-y border-y-[#D9D9D9]  w-[90%] mx-auto flex justify-center"
+      >
         <Image
           alt=""
           src={logo}
@@ -17,27 +22,39 @@ const Footer = () => {
       <div className="w-4/5 mx-auto px-4 py-4 flex justify-between gap-4 gap-y-6 flex-wrap ">
         <div className="flex flex-col gap-2">
           <span className="mb-2 text-sm font-semibold">About</span>
-          <span className=" text-sm font-medium text-[#4D4D4D]">
+          <span className=" text-sm font-medium text-[#4D4D4D] cursor-pointer">
             Our Company
           </span>
-          <span className=" text-sm font-medium text-[#4D4D4D]">Our Story</span>
-          <span className=" text-sm font-medium text-[#4D4D4D]">Blog</span>
+          <span className=" text-sm font-medium text-[#4D4D4D] cursor-pointer">
+            Our Story
+          </span>
+          <span className=" text-sm font-medium text-[#4D4D4D] cursor-pointer">
+            Blog
+          </span>
         </div>
         <div className="flex flex-col gap-2">
           <span className="mb-2 text-sm font-semibold">Other Links</span>
-          <span className=" text-sm font-medium text-[#4D4D4D]">
+          <span className=" text-sm font-medium text-[#4D4D4D] cursor-pointer">
             Terms & Conditions
           </span>
-          <span className=" text-sm font-medium text-[#4D4D4D]">
+          <span className=" text-sm font-medium text-[#4D4D4D] cursor-pointer">
             Privacy Policy
           </span>
-          <span className=" text-sm font-medium text-[#4D4D4D]">Returns</span>
+          <span className=" text-sm font-medium text-[#4D4D4D] cursor-pointer">
+            Returns
+          </span>
         </div>
         <div className="flex flex-col gap-2">
           <span className="mb-2 text-sm font-semibold">Follow Us</span>
-          <span className=" text-sm font-medium text-[#4D4D4D]">Facebook</span>
-          <span className=" text-sm font-medium text-[#4D4D4D]">Instagram</span>
-          <span className=" text-sm font-medium text-[#4D4D4D]">Twitter</span>
+          <span className=" text-sm font-medium text-[#4D4D4D] cursor-pointer">
+            Facebook
+          </span>
+          <span className=" text-sm font-medium text-[#4D4D4D] cursor-pointer">
+            Instagram
+          </span>
+          <span className=" text-sm font-medium text-[#4D4D4D] cursor-pointer">
+            Twitter
+          </span>
         </div>
         <div className="flex flex-col gap-2">
           <span className="mb-2 text-sm font-semibold">Contact Us</span>

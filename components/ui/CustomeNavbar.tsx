@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import MenuIcon from "@mui/icons-material/Menu";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const CustomeNavbar = () => {
@@ -41,7 +40,10 @@ const CustomeNavbar = () => {
               0
             </span>
           </div>
-          <div className="flex gap-2 cursor-pointer text-black items-end">
+          <div
+            onClick={() => navigate.push("/login")}
+            className="flex gap-2 cursor-pointer text-black items-end"
+          >
             <PermIdentityIcon />
             <span className=" text-sm font-medium">Account</span>
           </div>

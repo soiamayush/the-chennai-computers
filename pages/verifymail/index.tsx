@@ -1,12 +1,19 @@
 "use client";
 import Image from "next/image";
-import React, { useState, useRef, RefObject } from "react";
+import React, { useState, useRef } from "react";
 import authbg2 from "@/public/authbg2.svg";
 import logo from "@/public/logo.svg";
+import { useRouter } from "next/navigation";
 
 const Index = () => {
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(""));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const router = useRouter();
+  const handleVerify = () => {
+    router.push("/");
+  };
+
+  const handleResend = () => {};
 
   const handleChange = (element: HTMLInputElement, index: number) => {
     if (isNaN(Number(element.value))) return;
@@ -76,13 +83,19 @@ const Index = () => {
             </div>
           </div>
 
-          <button className="bg-[#1C5356] rounded-lg flex items-center justify-center text-white font-semibold text-base p-2">
+          <button
+            onClick={handleVerify}
+            className="bg-[#1C5356] rounded-lg flex items-center justify-center text-white font-semibold text-base p-2"
+          >
             Verify
           </button>
 
           <span className="text-base w-full justify-center flex gap-2">
             Didn’t receive code?
-            <span className="text-[#1C5356] underline font-semibold cursor-pointer">
+            <span
+              onClick={handleResend}
+              className="text-[#1C5356] underline font-semibold cursor-pointer"
+            >
               Resend Code
             </span>
           </span>

@@ -8,6 +8,7 @@ import { cities } from "./Modal";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Footer from "@/components/ui/Footer";
 import Label from "@/components/ui/Label";
+import { useRouter } from "next/navigation";
 
 const Index = () => {
   const [showStateModal, setShowStateModal] = useState(false);
@@ -15,6 +16,8 @@ const Index = () => {
   const [selectedState, setSelectedState] = useState<string>("");
   const [selectedCity, setSelectedCity] = useState<string>("");
   const [availableCities, setAvailableCities] = useState<string[]>([]);
+
+  const navigate = useRouter();
 
   const handleStateClick = () => {
     setShowStateModal(true);
@@ -168,8 +171,11 @@ const Index = () => {
               ₹10,450
             </span>
           </div>
-          <button className="bg-[#FFBA35] text-base text-[#1C5356] flex items-center justify-center p-2 rounded-full font-semibold">
-            Proceed to Checkout
+          <button
+            onClick={() => navigate.push("/billing")}
+            className="bg-[#FFBA35] text-base text-[#1C5356] flex items-center justify-center p-2 rounded-full font-semibold"
+          >
+            Proceed to Pay
           </button>
         </div>
       </div>

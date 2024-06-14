@@ -10,6 +10,7 @@ import gpu from "@/public/gpu.svg";
 import cpu from "@/public/cpu.svg";
 import bannerimg from "@/public/bannerimg.svg";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const featuredData = [
   { image: featured1, title: "HD Monitor", numOfProducts: 20 },
@@ -38,6 +39,8 @@ const Featured = () => {
   const [box, setBox] = useState<HTMLDivElement | null>(null);
   const [numOfScreens, setNumOfScreens] = useState(1);
   const [activeScreen, setActiveScreen] = useState(0);
+
+  const router = useRouter();
 
   useEffect(() => {
     const container = document.querySelector(
@@ -136,7 +139,10 @@ const Featured = () => {
             className="mt-8 z-10 w-1/2 hidden md:flex"
           />
 
-          <button className="h-fit text-[#1C5356] rounded-md font-medium text-base bg-white px-3 py-2">
+          <button
+            onClick={() => router.push("/shop")}
+            className="h-fit text-[#1C5356] rounded-md font-medium text-base bg-white px-3 py-2"
+          >
             Shop Collection
           </button>
         </div>

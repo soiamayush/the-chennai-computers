@@ -13,7 +13,7 @@ import Card from "@/components/ui/Card";
 import Paginate from "@/components/ui/Pagination";
 import Footer from "@/components/ui/Footer";
 import Label from "@/components/ui/Label";
-
+import { useRouter } from "next/navigation";
 export const cardData = [
   {
     off: "30",
@@ -120,6 +120,7 @@ const Index: React.FC = () => {
   const [valueA, setValueA] = useState<number>(50);
   const [valueB, setValueB] = useState<number>(5000);
 
+  const router = useRouter();
   const handleSortOptionClick = (option: string) => {
     setFilters((prevFilters) => {
       if (!prevFilters.includes(option)) {
@@ -301,7 +302,7 @@ const Index: React.FC = () => {
           </div>
         </div>
         <div className="w-full px-1 sm:px-3">
-          <div className="flex w-full text-[#4d4d4d] justify-start sm:justify-between flex-col sm:flex-row gap-4">
+          <div className="flex w-full text-[#4d4d4d] justify-start sm:justify-between flex-wrap flex-row gap-4">
             <span className="text-base font-semibold w-fit">
               Showing 1-12 of 140 results
             </span>
@@ -377,11 +378,12 @@ const Index: React.FC = () => {
             )}
           </div>
 
-          <div className="flex flex-wrap justify-between gap-3 p-2 max-h-[150vh] overflow-y-auto hide-horizontal-scrollbar">
+          <div className="flex flex-wrap justify-center sm:justify-between gap-3 p-2 max-h-[150vh] overflow-y-auto hide-horizontal-scrollbar">
             {cardData.map((card) => (
               <Card cardData={card} />
             ))}
           </div>
+
           <Paginate currentPage={currentPage} setCurrentPage={setCurrentPage} />
         </div>
       </div>

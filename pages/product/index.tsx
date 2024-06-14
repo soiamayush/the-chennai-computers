@@ -16,6 +16,9 @@ import productsdesc from "@/public/productsdesc.svg";
 import Related from "@/components/productcomponent/Related";
 import Label from "@/components/ui/Label";
 import Footer from "@/components/ui/Footer";
+import { useRouter } from "next/router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const productData = [
   { image: cpu },
@@ -27,6 +30,7 @@ const productData = [
 const Index = () => {
   const [index, setIndex] = useState(0);
   const [showData, setShowData] = useState(0);
+  const router = useRouter();
 
   const handlePrev = () => {
     if (index == 0) {
@@ -43,9 +47,22 @@ const Index = () => {
       setIndex(index + 1);
     }
   };
+  const [CartText, setCartText] = useState("Add to cart");
+
+  const notify = () => toast.success("Item has been added to cart!!");
+
+  const handleCart = (text: string) => {
+    if (text === "addtocart") {
+      notify();
+      setCartText("Go to cart");
+    } else if ("gotocart") {
+      router.push("/cart");
+    }
+  };
   return (
     <div>
       <CustomeNavbar />
+      <ToastContainer />
       <PageDetails
         title={"Shop"}
         tag={"Home / Gaming CPU / Crosshair RBG CPU"}
@@ -130,11 +147,23 @@ const Index = () => {
             </div>
           </div>
           <div className="flex gap-2 w-fit">
-            <button className="rounded-full bg-[#FFBA35] flex items-center text-[#1C5356]  font-semibold text-base p-3 px-5">
+            <button
+              onClick={() => router.push("/cart")}
+              className="rounded-full bg-[#FFBA35] flex items-center text-[#1C5356]  font-semibold text-base p-3 px-5"
+            >
               Buy Now
             </button>
-            <button className="rounded-full  flex items-center text-[#1C5356] border border-[#cdcdcc] font-semibold text-base p-3 px-5">
-              Add to cart
+            <button
+              onClick={() => {
+                if (CartText === "Add to cart") {
+                  handleCart("addtocart");
+                } else if (CartText === "Go to cart") {
+                  handleCart("gotocart");
+                }
+              }}
+              className="rounded-full  flex items-center text-[#1C5356] border border-[#cdcdcc] font-semibold text-base p-3 px-5"
+            >
+              {CartText}
             </button>
           </div>
           <div className="flex flex-col gap-4">

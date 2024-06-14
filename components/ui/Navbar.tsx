@@ -7,9 +7,18 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import MenuIcon from "@mui/icons-material/Menu";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import useStore from "@/store/states";
 
 const Navbar = () => {
   const navigate = useRouter();
+  const { searchText, setSearchText }: any = useStore();
+
+  const handleSearch = () => {
+    if (searchText.length != 0) {
+      navigate.push("/shop");
+    }
+  };
+
   return (
     <div className="w-full">
       <div className="flex justify-between px-6 py-2 items-center w-full">
@@ -23,8 +32,12 @@ const Navbar = () => {
           <input
             className="rounded-s-lg focus:outline-none w-full px-4 py-1 text-[#4D4D4D] text-sm"
             placeholder="Search for products..."
+            onChange={(e) => setSearchText(e.target.value)}
           ></input>
-          <div className="flex items-center cursor-pointer rounded-e-lg gap-1 text-[#1C5356] bg-[#FFBA35] px-6 py-1">
+          <div
+            onClick={handleSearch}
+            className="flex items-center cursor-pointer rounded-e-lg gap-1 text-[#1C5356] bg-[#FFBA35] px-6 py-1"
+          >
             <SearchIcon className="text-base" /> Search
           </div>
         </div>
@@ -35,7 +48,10 @@ const Navbar = () => {
               0
             </span>
           </div>
-          <div className="flex gap-2 cursor-pointer text-black items-end">
+          <div
+            onClick={() => navigate.push("/login")}
+            className="flex gap-2 cursor-pointer text-black items-end"
+          >
             <PermIdentityIcon />
             <span className=" text-sm font-medium">Account</span>
           </div>
