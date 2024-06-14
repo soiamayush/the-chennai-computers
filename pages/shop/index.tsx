@@ -173,7 +173,7 @@ const Index: React.FC = () => {
     <div>
       <CustomeNavbar />
       <PageDetails title="Shop" tag="Home / Gaming CPU" isSearch={true} />
-      <div className="flex gap-3 p-5  ">
+      <div className="flex gap-3 p-4 ">
         <div className=" hidden md:flex flex-col gap-4 w-1/4 lg:w-1/5">
           <span className="text-xl md:text-2xl font-semibold px-2">
             Filter Options
