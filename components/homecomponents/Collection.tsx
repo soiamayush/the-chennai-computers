@@ -92,9 +92,7 @@ const Collection = () => {
         </div>
       </div>
       <div className="hide-horizontal-scrollbar flex items-center px-8 gap-4 md:gap-6 max-w-screen overflow-x-auto">
-        {cardData.map((data) => (
-          <Card cardData={data} />
-        ))}
+        {cardData && cardData.map((data) => <Card cardData={data} />)}
       </div>
     </div>
   );

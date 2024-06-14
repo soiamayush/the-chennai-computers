@@ -99,22 +99,23 @@ const Index = () => {
           </div>
 
           <div className="flex justify-between gap-2">
-            {productData.map((product, index) => (
-              <div
-                key={index}
-                onClick={() => setIndex(index)}
-                className="rounded-xl cursor-pointer bg-[#f5f5f5] flex items-center justify-center"
-                style={{ height: "100px", width: "100px" }}
-              >
-                <Image
-                  src={product.image}
-                  alt=""
-                  height={50}
-                  width={80}
-                  className="object-contain"
-                />
-              </div>
-            ))}
+            {productData &&
+              productData.map((product, index) => (
+                <div
+                  key={index}
+                  onClick={() => setIndex(index)}
+                  className="rounded-xl cursor-pointer bg-[#f5f5f5] flex items-center justify-center"
+                  style={{ height: "100px", width: "100px" }}
+                >
+                  <Image
+                    src={product.image}
+                    alt=""
+                    height={50}
+                    width={80}
+                    className="object-contain"
+                  />
+                </div>
+              ))}
           </div>
         </div>
 

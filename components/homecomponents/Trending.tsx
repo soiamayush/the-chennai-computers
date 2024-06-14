@@ -12,9 +12,7 @@ const Trending = () => {
         Trending Products
       </span>
       <div className="flex  gap-8 flex-wrap justify-center sm:justify-between">
-        {cardData.map((data) => (
-          <Card cardData={data} />
-        ))}
+        {cardData && cardData.map((data) => <Card cardData={data} />)}
       </div>
       <div className="w-full flex justify-end">
         {" "}

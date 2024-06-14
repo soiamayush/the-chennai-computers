@@ -104,9 +104,10 @@ const Featured = () => {
         </div>
       </div>
       <div className="py-6 flex container-carousel gap-8 max-w-screen overflow-x-auto hide-horizontal-scrollbar">
-        {featuredData.map((card, index) => (
-          <FeaturedCard key={index} card={card} />
-        ))}
+        {featuredData &&
+          featuredData.map((card, index) => (
+            <FeaturedCard key={index} card={card} />
+          ))}
       </div>
       <div className="flex gap-1 justify-center items-center w-full">
         {Array.from({ length: numOfScreens }, (_, index) => (

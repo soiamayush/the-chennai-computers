@@ -354,20 +354,21 @@ const Index: React.FC = () => {
             <span className="text-base font-medium text-[#4d4d4d]">
               Active Filters
             </span>
-            {filters.map((elem, index) => (
-              <div
-                className="items-center flex gap-2 rounded-full p-2 px-3 bg-[#FFBA35] text-[#1C5356] text-sm"
-                key={index}
-              >
-                {elem}
-                <span className="" onClick={() => handleRemove(index)}>
-                  <CloseIcon
-                    style={{ fontSize: "1rem" }}
-                    className="cursor-pointer"
-                  />
-                </span>
-              </div>
-            ))}
+            {filters &&
+              filters.map((elem, index) => (
+                <div
+                  className="items-center flex gap-2 rounded-full p-2 px-3 bg-[#FFBA35] text-[#1C5356] text-sm"
+                  key={index}
+                >
+                  {elem}
+                  <span className="" onClick={() => handleRemove(index)}>
+                    <CloseIcon
+                      style={{ fontSize: "1rem" }}
+                      className="cursor-pointer"
+                    />
+                  </span>
+                </div>
+              ))}
             {filters.length !== 0 && (
               <span
                 className="text-sm cursor-pointer underline font-medium text-[#4d4d4d]"
@@ -379,9 +380,7 @@ const Index: React.FC = () => {
           </div>
 
           <div className="flex flex-wrap justify-center sm:justify-between gap-3 p-2 max-h-[150vh] overflow-y-auto hide-horizontal-scrollbar">
-            {cardData.map((card) => (
-              <Card cardData={card} />
-            ))}
+            {cardData && cardData.map((card) => <Card cardData={card} />)}
           </div>
 
           <Paginate currentPage={currentPage} setCurrentPage={setCurrentPage} />

@@ -78,15 +78,16 @@ const Modal = ({ showModal, closeModal, selectState }: any) => {
         </div>
 
         <ul className="max-h-60 overflow-y-auto">
-          {states.map((state, index) => (
-            <li
-              key={index}
-              className="p-2 cursor-pointer hover:bg-gray-200"
-              onClick={() => selectState(state)}
-            >
-              {state}
-            </li>
-          ))}
+          {states &&
+            states.map((state, index) => (
+              <li
+                key={index}
+                className="p-2 cursor-pointer hover:bg-gray-200"
+                onClick={() => selectState(state)}
+              >
+                {state}
+              </li>
+            ))}
         </ul>
       </div>
     </div>

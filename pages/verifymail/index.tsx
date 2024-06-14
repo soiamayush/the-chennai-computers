@@ -64,22 +64,23 @@ const Index = () => {
               Code*
             </label>
             <div className="flex gap-2 justify-start text-black text-base">
-              {otp.map((value, index) => (
-                <input
-                  key={index}
-                  type="text"
-                  maxLength={1} // Ensuring maxLength is a number
-                  className="border border-[#C9C9C9] rounded-full p-2 focus:outline-none font-medium w-12 h-12 text-center"
-                  value={value}
-                  onChange={(e) =>
-                    handleChange(e.target as HTMLInputElement, index)
-                  }
-                  onKeyDown={(e) => handleKeyDown(e, index)}
-                  ref={(el) => {
-                    inputRefs.current[index] = el;
-                  }}
-                />
-              ))}
+              {otp &&
+                otp.map((value, index) => (
+                  <input
+                    key={index}
+                    type="text"
+                    maxLength={1} // Ensuring maxLength is a number
+                    className="border border-[#C9C9C9] rounded-full p-2 focus:outline-none font-medium w-12 h-12 text-center"
+                    value={value}
+                    onChange={(e) =>
+                      handleChange(e.target as HTMLInputElement, index)
+                    }
+                    onKeyDown={(e) => handleKeyDown(e, index)}
+                    ref={(el) => {
+                      inputRefs.current[index] = el;
+                    }}
+                  />
+                ))}
             </div>
           </div>
 
