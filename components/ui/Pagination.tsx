@@ -3,10 +3,15 @@ import React, { useState } from "react";
 interface PaginateProps {
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  totalPage: number;
 }
 
-const Paginate: React.FC<PaginateProps> = ({ currentPage, setCurrentPage }) => {
-  const maxPages = 10;
+const Paginate: React.FC<PaginateProps> = ({
+  currentPage,
+  setCurrentPage,
+  totalPage,
+}) => {
+  const maxPages = totalPage;
 
   const leftSide = Math.max(currentPage - 2, 1);
   const rightSide = Math.min(currentPage + 2, maxPages);

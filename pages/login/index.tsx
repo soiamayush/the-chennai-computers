@@ -6,13 +6,40 @@ import logo from "@/public/logo.svg";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import google from "@/public/google.svg";
+import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "@/slice/auth";
+import { AppDispatch } from "@/store";
 
-const index = () => {
+const Index: React.FC = () => {
   const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
   const [pvisible, setPVisible] = useState(false);
+  const [formdata, setformdata] = useState({ password: "", email: "" });
+  const { loading } = useSelector((state: any) => state.user);
+
   const handleLogin = () => {
-    router.push("/");
+    console.log(formdata);
+    if (!formdata.email || !formdata.password) {
+      toast.warning("All fields are required");
+      return;
+    }
+
+    const formDataWithFile = new FormData();
+    formDataWithFile.append("email", formdata.email);
+    formDataWithFile.append("password", formdata.password);
+    const payload: any = {
+      email: formdata.email,
+      password: formdata.password,
+    };
+    dispatch(loginUser(payload))
+      .unwrap()
+      .then(() => {
+        router.push("/");
+        toast.success("Login success!!");
+      })
+      .catch((error) => toast.error(error.message));
   };
   return (
     <div className="flex gap-4 justify-between p-6">
@@ -42,6 +69,12 @@ const index = () => {
               className="border w-full p-2 border-[#C9C9C9] rounded-lg text-black text-base  focus:outline-none font-medium"
               placeholder="Enter Email Address"
               name="email"
+              onChange={(e) =>
+                setformdata((prev) => ({
+                  ...prev,
+                  [e.target.name]: e.target.value,
+                }))
+              }
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -54,6 +87,12 @@ const index = () => {
                 placeholder="Enter password"
                 name="password"
                 type={pvisible ? "text" : "password"}
+                onChange={(e) =>
+                  setformdata((prev) => ({
+                    ...prev,
+                    [e.target.name]: e.target.value,
+                  }))
+                }
               />
               <div
                 className="px-2 cursor-pointer text-[#C9C9C9]"
@@ -74,8 +113,9 @@ const index = () => {
           <button
             onClick={handleLogin}
             className="bg-[#1C5356] rounded-lg flex items-center justify-center text-white font-semibold text-base p-2"
+            disabled={loading}
           >
-            Sign in
+            {loading ? "Signing in..." : "Sign in"}
           </button>
           <div className="cursor-pointer border border-[#C9C9C9] rounded-lg p-2 flex justify-center items-center gap-2">
             <Image src={google} alt="" className="" width={20} />
@@ -98,4 +138,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

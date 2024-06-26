@@ -2,131 +2,56 @@
 import RangeComponent from "@/components/searchcomponents/Slider";
 import CustomeNavbar from "@/components/ui/CustomeNavbar";
 import PageDetails from "@/components/ui/PageDetails";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import CloseIcon from "@mui/icons-material/Close";
-import product1 from "@/public/prodcut1.svg";
-import product2 from "@/public/product2.svg";
-import product3 from "@/public/product3.svg";
 import Card from "@/components/ui/Card";
 import Paginate from "@/components/ui/Pagination";
 import Footer from "@/components/ui/Footer";
 import Label from "@/components/ui/Label";
 import { useRouter } from "next/navigation";
-export const cardData = [
-  {
-    off: "30",
-    image: product1,
-    tag: "cabinet",
-    title: "Crosshair RGB CPU Cabinet with ",
-    discountAmount: "6999",
-    amount: "10000",
-  },
-  {
-    off: "30",
-    image: product1,
-    tag: "cabinet",
-    title: "Crosshair RGB CPU Cabinet with ",
-    discountAmount: "6999",
-    amount: "10000",
-  },
-  {
-    off: "30",
-    image: product1,
-    tag: "cabinet",
-    title: "Crosshair RGB CPU Cabinet with ",
-    discountAmount: "6999",
-    amount: "10000",
-  },
-  {
-    off: "30",
-    image: product1,
-    tag: "cabinet",
-    title: "Crosshair RGB CPU Cabinet with ",
-    discountAmount: "6999",
-    amount: "10000",
-  },
-  {
-    off: "30",
-    image: product1,
-    tag: "cabinet",
-    title: "Crosshair RGB CPU Cabinet with ",
-    discountAmount: "6999",
-    amount: "10000",
-  },
-  {
-    off: "30",
-    image: product2,
-    tag: "cabinet",
-    title: "Crosshair RGB CPU Cabinet with ",
-    discountAmount: "6999",
-    amount: "10000",
-  },
-  {
-    off: "30",
-    image: product3,
-    tag: "cabinet",
-    title: "Crosshair RGB CPU Cabinet with ",
-    discountAmount: "6999",
-    amount: "10000",
-  },
-  {
-    off: "30",
-    image: product1,
-    tag: "cabinet",
-    title: "Crosshair RGB CPU Cabinet with ",
-    discountAmount: "6999",
-    amount: "10000",
-  },
-  {
-    off: "30",
-    image: product2,
-    tag: "cabinet",
-    title: "Crosshair RGB CPU Cabinet with ",
-    discountAmount: "6999",
-    amount: "10000",
-  },
-  {
-    off: "30",
-    image: product2,
-    tag: "cabinet",
-    title: "Crosshair RGB CPU Cabinet with ",
-    discountAmount: "6999",
-    amount: "10000",
-  },
-  {
-    off: "30",
-    image: product2,
-    tag: "cabinet",
-    title: "Crosshair RGB CPU Cabinet with ",
-    discountAmount: "6999",
-    amount: "10000",
-  },
-  {
-    off: "30",
-    image: product2,
-    tag: "cabinet",
-    title: "Crosshair RGB CPU Cabinet with ",
-    discountAmount: "6999",
-    amount: "10000",
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store";
+import { AllProduct } from "@/slice/product";
+import useStore from "@/store/states";
 
 const Index: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showmodal, setShowmodal] = useState<boolean>(false);
   const [filters, setFilters] = useState<string[]>([]);
-  const [valueA, setValueA] = useState<number>(50);
-  const [valueB, setValueB] = useState<number>(5000);
+  const [valueA, setValueA] = useState<number>(500);
+  const [valueB, setValueB] = useState<number>(500000);
+  const [totalPage, setTotalPage] = useState(1);
+  const [sorting, setSorting] = useState("");
+
+  const { searchText }: any = useStore((state) => state);
 
   const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { allProduct }: any = useSelector((state: any) => state.product);
+  const [products, setProducts] = useState<any>(null);
+
   const handleSortOptionClick = (option: string) => {
     setFilters((prevFilters) => {
-      if (!prevFilters.includes(option)) {
-        return [...prevFilters, option];
+      // Define the sort options
+      const highToLow = "Price: high to low";
+      const lowToHigh = "Price: low to high";
+      if (option === highToLow) setSorting("-price");
+      else setSorting("price");
+
+      // Remove the opposite sort option if it exists
+      let updatedFilters = prevFilters.filter(
+        (filter) => filter !== highToLow && filter !== lowToHigh
+      );
+
+      // Add the new sort option if it wasn't already present
+      if (!updatedFilters.includes(option)) {
+        updatedFilters = [...updatedFilters, option];
       }
-      return prevFilters;
+
+      return updatedFilters;
     });
     setShowmodal(false);
   };
@@ -151,7 +76,7 @@ const Index: React.FC = () => {
   };
 
   const handleRangeChange = (valueA: number, valueB: number) => {
-    if (valueA !== 50 || valueB !== 5000) {
+    if (valueA !== 500 || valueB !== 500000) {
       setFilters((prevFilters) => {
         const rangeFilter = `₹${Math.min(valueA, valueB)} - ₹${Math.max(
           valueB,
@@ -168,6 +93,37 @@ const Index: React.FC = () => {
       );
     }
   };
+
+  const [totalCount, setTotalCount] = useState(0);
+  const [data, setData] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        dispatch(
+          AllProduct({
+            maxPrice: valueB,
+            minPrice: valueA,
+            keyword: searchText,
+            currentPage,
+            sorting: sorting,
+          })
+        )
+          .unwrap()
+          .then((res) => {
+            setProducts(res.products);
+            console.log(res);
+            setTotalPage(Math.ceil(res.productsCount / res.resPerPage));
+            setTotalCount(res.productsCount);
+            setData(res);
+          });
+      } catch (err) {
+        console.error("Error fetching products:", err);
+      }
+    };
+
+    fetchData();
+  }, [filters, currentPage, sorting]);
 
   return (
     <div>
@@ -288,8 +244,8 @@ const Index: React.FC = () => {
             </span>
             <div className="max-w-fit flex flex-wrap items-center justify-center">
               <RangeComponent
-                min={50}
-                max={5000}
+                min={500}
+                max={500000}
                 step={1}
                 dual
                 valueA={valueA}
@@ -304,7 +260,8 @@ const Index: React.FC = () => {
         <div className="w-full px-1 sm:px-3">
           <div className="flex w-full text-[#4d4d4d] justify-start sm:justify-between flex-wrap flex-row gap-4">
             <span className="text-base font-semibold w-fit">
-              Showing 1-12 of 140 results
+              Showing {(currentPage - 1) * data?.resPerPage + 1} -
+              {currentPage * data?.resPerPage} of {totalCount} results
             </span>
             <div className="flex gap-3 flex-row items-center">
               <span className="text-base font-semibold">Sort By :</span>
@@ -339,12 +296,12 @@ const Index: React.FC = () => {
                     >
                       Price: high to low
                     </span>
-                    <span
+                    {/* <span
                       className="p-2 hover:bg-gray-100 rounded-md cursor-pointer"
                       onClick={() => handleSortOptionClick("Popularity")}
                     >
                       Popularity
-                    </span>
+                    </span> */}
                   </div>
                 )}
               </div>
@@ -380,10 +337,17 @@ const Index: React.FC = () => {
           </div>
 
           <div className="flex flex-wrap justify-center sm:justify-between gap-3 p-2 max-h-[150vh] overflow-y-auto hide-horizontal-scrollbar">
-            {cardData && cardData.map((card) => <Card cardData={card} />)}
+            {products &&
+              products.map((product: any) => (
+                <Card cardData={product} key={product._id} />
+              ))}
           </div>
 
-          <Paginate currentPage={currentPage} setCurrentPage={setCurrentPage} />
+          <Paginate
+            totalPage={totalPage}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
       </div>
       <Label />

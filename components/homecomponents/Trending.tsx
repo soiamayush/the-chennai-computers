@@ -1,21 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { cardData } from "./Collection";
 import Card from "../ui/Card";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 
 const Trending = () => {
   const router = useRouter();
+  const { allProduct } = useSelector((state: any) => state.product);
+  useEffect(() => {
+    console.log(allProduct);
+  }, [allProduct]);
   return (
     <div className="flex flex-col gap-6 px-6 md:px-8">
       <span className="text-xl md:text-3xl text-[#1C5356] font-semibold">
         Trending Products
       </span>
       <div className="flex  gap-8 flex-wrap justify-center sm:justify-between">
-        {cardData && cardData.map((data) => <Card cardData={data} />)}
+        {allProduct?.products &&
+          allProduct?.products.map((product: any) => (
+            <Card cardData={product} key={product._id} />
+          ))}
       </div>
       <div className="w-full flex justify-end">
-        {" "}
         <div
           onClick={() => router.push("/shop")}
           className="h-fit flex text-sm md:text-sm items-center gap-2 text-[#FFBA35] cursor-pointer font-semibold px-4"

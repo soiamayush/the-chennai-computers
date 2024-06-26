@@ -1,6 +1,6 @@
 import CustomeNavbar from "@/components/ui/CustomeNavbar";
 import PageDetails from "@/components/ui/PageDetails";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import WestIcon from "@mui/icons-material/West";
 import EastIcon from "@mui/icons-material/East";
 import Image from "next/image";
@@ -19,6 +19,9 @@ import Footer from "@/components/ui/Footer";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store";
+import { product } from "@/slice/product";
 
 const productData = [
   { image: cpu },
@@ -29,8 +32,9 @@ const productData = [
 
 const Index = () => {
   const [index, setIndex] = useState(0);
-  const [showData, setShowData] = useState(0);
+  const [showData, setShowData] = useState<any>(0);
   const router = useRouter();
+  const { id } = router.query;
 
   const handlePrev = () => {
     if (index == 0) {
@@ -59,10 +63,21 @@ const Index = () => {
       router.push("/cart");
     }
   };
+
+  const [productData, setProductData] = useState<any>();
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (id) {
+      dispatch(product(id)).then((res: any) => {
+        console.log(res);
+      });
+    }
+  }, [id]);
+
   return (
     <div>
       <CustomeNavbar />
-      <ToastContainer />
       <PageDetails
         title={"Shop"}
         tag={"Home / Gaming CPU / Crosshair RBG CPU"}
@@ -100,7 +115,7 @@ const Index = () => {
 
           <div className="flex justify-between gap-2">
             {productData &&
-              productData.map((product, index) => (
+              productData.map((product: any, index: any) => (
                 <div
                   key={index}
                   onClick={() => setIndex(index)}

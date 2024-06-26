@@ -3,6 +3,7 @@ import Card from "@/components/ui/Card";
 import product1 from "@/public/prodcut1.svg";
 import product2 from "@/public/product2.svg";
 import product3 from "@/public/product3.svg";
+import { useSelector } from "react-redux";
 
 export const cardData = [
   {
@@ -72,6 +73,7 @@ export const cardData = [
 ];
 
 const Collection = () => {
+  const { allProduct } = useSelector((state: any) => state.product);
   return (
     <div className="flex py-6 flex-col gap-6">
       <div className="flex w-full justify-center items-center text-[#1C5356] text-xl md:text-2xl font-medium">
@@ -92,7 +94,10 @@ const Collection = () => {
         </div>
       </div>
       <div className="hide-horizontal-scrollbar flex items-center px-8 gap-4 md:gap-6 max-w-screen overflow-x-auto">
-        {cardData && cardData.map((data) => <Card cardData={data} />)}
+        {allProduct?.products &&
+          allProduct?.products.map((product: any) => (
+            <Card cardData={product} key={product._id} />
+          ))}
       </div>
     </div>
   );

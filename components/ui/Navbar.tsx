@@ -8,10 +8,12 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import MenuIcon from "@mui/icons-material/Menu";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import useStore from "@/store/states";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const navigate = useRouter();
   const { searchText, setSearchText }: any = useStore();
+  const { userData } = useSelector((state: any) => state.user);
 
   const handleSearch = () => {
     if (searchText.length != 0) {
@@ -48,12 +50,17 @@ const Navbar = () => {
               0
             </span>
           </div>
-          <div
-            onClick={() => navigate.push("/login")}
-            className="flex gap-2 cursor-pointer text-black items-end"
-          >
+          <div className="flex gap-2 cursor-pointer text-black items-end">
             <PermIdentityIcon />
-            <span className=" text-sm font-medium">Account</span>
+            <span className=" text-sm font-medium">
+              {userData ? (
+                <span onClick={() => navigate.push("/userprofile")}>
+                  {userData.name.split(" ")[0]}
+                </span>
+              ) : (
+                <span onClick={() => navigate.push("/login")}>Account</span>
+              )}
+            </span>
           </div>
         </div>
       </div>

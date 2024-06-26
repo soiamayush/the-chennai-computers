@@ -5,9 +5,11 @@ import { useRouter } from "next/navigation";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useSelector } from "react-redux";
 
 const CustomeNavbar = () => {
   const navigate = useRouter();
+  const { userData } = useSelector((state: any) => state.user);
   return (
     <div className="w-full">
       <div className="flex shadow-xl justify-between px-6 py-2 items-center w-full border-b border-b-[#C9C9C9]">
@@ -45,7 +47,15 @@ const CustomeNavbar = () => {
             className="flex gap-2 cursor-pointer text-black items-end"
           >
             <PermIdentityIcon />
-            <span className=" text-sm font-medium">Account</span>
+            <span className=" text-sm font-medium">
+              {userData ? (
+                <span onClick={() => navigate.push("/userprofile")}>
+                  {userData?.name?.split(" ")[0]}
+                </span>
+              ) : (
+                <span onClick={() => navigate.push("/login")}>Account</span>
+              )}
+            </span>
           </div>
         </div>
       </div>

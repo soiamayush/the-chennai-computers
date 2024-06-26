@@ -1,14 +1,35 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import authbg1 from "@/public/authbg1.svg";
 import logo from "@/public/logo.svg";
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { AppDispatch } from "@/store";
+import { forgetPassword } from "@/slice/auth";
 const index = () => {
   const router = useRouter();
 
-  const onSubmit = () => {
-    router.push("/");
+  const { loading, success } = useSelector((state: any) => state.user);
+  const dispatch = useDispatch<AppDispatch>();
+  const [email, setEmail] = useState("");
+  const handleSubmit = () => {
+    if (!email) {
+      toast.warning("Enter your email!!");
+      return;
+    }
+
+    const payload: any = {
+      email: email,
+    };
+
+    dispatch(forgetPassword(payload))
+      .unwrap()
+      .then(() => {
+        toast.success(`Email has been sent to ${email}`);
+      })
+      .catch((error) => toast.error(error.message));
   };
   return (
     <div className="flex gap-4 justify-between p-6">
@@ -38,14 +59,21 @@ const index = () => {
               className="border w-full p-2 border-[#C9C9C9] rounded-lg text-black text-base  focus:outline-none font-medium"
               placeholder="Enter Email Address"
               name="email"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
           <button
-            onClick={onSubmit}
+            onClick={handleSubmit}
             className="bg-[#1C5356] rounded-lg flex items-center justify-center text-white font-semibold text-base p-2"
           >
-            Submit
+            {success ? (
+              <span>Email sent</span>
+            ) : loading ? (
+              <span>Sending mail</span>
+            ) : (
+              <span>Submit</span>
+            )}
           </button>
 
           <span className="text-base w-full justify-center flex gap-2">
