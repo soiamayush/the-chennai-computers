@@ -43,12 +43,45 @@ export const product = createAsyncThunk(
   }
 );
 
+export const cartHandler = createAsyncThunk(
+  "cart",
+  async (formdata, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post(`/cart`, formdata);
+      return response.data;
+    } catch (error: any) {
+      console.error("Error during cart handler:", error);
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      }
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const getcart = createAsyncThunk(
+  "cart/getcart",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(`/getcart`);
+      return response.data;
+    } catch (error: any) {
+      console.error("Error during cart get:", error);
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      }
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const initialState = {
   loading: false,
   success: false,
   error: null,
   allProduct: null,
   singleProduct: null,
+  message: "",
+  cartData: null,
 };
 const productSlice = createSlice({
   name: "product",
@@ -86,6 +119,40 @@ const productSlice = createSlice({
         state.error = null;
       })
       .addCase(product.rejected, (state: any, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.success = false;
+      });
+    builder
+      .addCase(cartHandler.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.success = false;
+      })
+      .addCase(cartHandler.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.error = null;
+        state.message = action.payload;
+      })
+      .addCase(cartHandler.rejected, (state: any, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.success = false;
+      });
+    builder
+      .addCase(getcart.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.success = false;
+      })
+      .addCase(getcart.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.error = null;
+        state.cartData = action.payload;
+      })
+      .addCase(getcart.rejected, (state: any, action) => {
         state.loading = false;
         state.error = action.payload;
         state.success = false;

@@ -70,7 +70,12 @@ const Index = () => {
     }
   };
 
+  useEffect(() => {
+    console.log(formdata);
+  }, [formdata]);
+
   const handleSignup = () => {
+    console.log(formdata);
     if (
       !formdata.name ||
       !formdata.email ||

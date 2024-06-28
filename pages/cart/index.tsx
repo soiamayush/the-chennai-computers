@@ -2,7 +2,7 @@ import CustomeNavbar from "@/components/ui/CustomeNavbar";
 import Footer from "@/components/ui/Footer";
 import Label from "@/components/ui/Label";
 import PageDetails from "@/components/ui/PageDetails";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
 import gpu from "@/public/gpu.svg";
@@ -10,8 +10,18 @@ import cpu from "@/public/cpu.svg";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { useRouter } from "next/navigation";
+import { product, getcart } from "@/slice/product";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@/store";
+
+interface CartItem {
+  id: any;
+  numOfItems: any;
+}
 
 const index = () => {
+  const { cartData } = useSelector((state: any) => state.product); // Replace with actual selector path
+  const [products, setProducts] = useState<any>({});
   const truncateText = (text: string, maxLength: number) => {
     if (text.length > maxLength) {
       return text.slice(0, maxLength) + "...";
@@ -24,6 +34,44 @@ const index = () => {
   const handleRemove = () => {};
 
   const navigate = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        await dispatch(getcart()); // Fetch cart items (if not already fetched in redux)
+      } catch (error) {
+        console.error("Error fetching cart items:", error);
+      }
+    };
+
+    fetchCartItems();
+  }, [dispatch]);
+
+  const findProduct = async (id: string) => {
+    try {
+      const res = await dispatch(product(id)); // Fetch product details
+      console.log(res);
+      const productData: any = res.payload.product; // Assuming your API returns product data
+      setProducts((prevProducts) => ({
+        ...prevProducts,
+        [id]: productData,
+      }));
+    } catch (error) {
+      console.error("Error fetching product details:", error);
+    }
+  };
+
+  useEffect(() => {
+    cartData?.cart?.items.forEach((item: any) => {
+      if (!products[item.id]) {
+        findProduct(item.id);
+      }
+    });
+    console.log(cartData);
+    console.log(products);
+  }, [cartData, products]);
+
   return (
     <div>
       <CustomeNavbar />
@@ -41,109 +89,62 @@ const index = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr className="text-sm">
-                  <td className="p-2 flex items-center gap-2">
-                    <CloseIcon
-                      className="cursor-pointer"
-                      onClick={() => handleRemove()}
-                    />
-                    <div className="flex items-center gap-2">
-                      <div
-                        className="flex items-center justify-center  bg-[#f5f5f5] rounded-xl cursor-pointer"
-                        style={{ height: "50px", width: "50px" }}
-                        onClick={() => navigate.push("/product")}
-                      >
-                        <Image
-                          src={cpu}
-                          alt="Product Image"
-                          height={40}
-                          width={60}
-                          className="object-contain"
-                        />
-                      </div>
-
-                      <div
-                        className="flex flex-col justify-between gap-1 w-4/5 cursor-pointer"
-                        onClick={() => navigate.push("/product")}
-                      >
-                        <span className="text-sm text-[#969696]">Cabinet</span>
-                        <span className="text-base text-black">
-                          {truncateText(
-                            "Corsair Spec-Delta RGB(ATX) Mid Tower Cabinet",
-                            30
-                          )}
-                        </span>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="p-2 w-1/4 md:w-1/6">₹1200</td>
-                  <td className="p-2 w-1/4 md:w-1/6">
-                    <div className="flex items-center gap-3 p-2 w-fit bg-[#EEEEEE] rounded-full text-[#1C5356]">
-                      <div className="flex items-center bg-white rounded-full cursor-pointer">
-                        <RemoveIcon
-                          className="m-1"
-                          style={{ fontSize: "0.8rem" }}
-                        />
-                      </div>
-                      <span className="text-base font-medium">1</span>
-                      <div className="flex items-center bg-white rounded-full cursor-pointer">
-                        <AddIcon
-                          className="m-1"
-                          style={{ fontSize: "0.8rem" }}
-                        />
-                      </div>
-                    </div>
-                  </td>
-                  <td className="p-2 w-1/4 md:w-1/6">₹1200</td>
-                </tr>
-
-                <tr className="text-sm">
-                  <td className="p-2 flex items-center gap-2">
-                    <CloseIcon className="cursor-pointer" />
-                    <div className="flex items-center gap-2">
-                      <div
-                        className="flex items-center justify-center bg-[#f5f5f5] rounded-xl cursor-pointer"
-                        style={{ height: "50px", width: "50px" }}
-                      >
-                        <Image
-                          src={gpu}
-                          alt="Product Image"
-                          height={40}
-                          width={60}
-                          className="object-contain"
-                        />
-                      </div>
-                      <div className="flex flex-col justify-between gap-1 w-3/4 md:w-4/5">
-                        <span className="text-sm text-[#969696]">Cabinet</span>
-                        <span className="text-base text-black">
-                          {truncateText(
-                            "Corsair Spec-Delta RGB(ATX) Mid Tower Cabinet",
-                            30
-                          )}
-                        </span>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="p-2 w-1/4 md:w-1/6">₹1200</td>
-                  <td className="p-2 w-1/4 md:w-1/6">
-                    <div className="flex items-center gap-3 p-2 w-fit bg-[#EEEEEE] rounded-full text-[#1C5356]">
-                      <div className="flex items-center bg-white rounded-full cursor-pointer">
-                        <RemoveIcon
-                          className="m-1"
-                          style={{ fontSize: "0.8rem" }}
-                        />
-                      </div>
-                      <span className="text-base font-medium">1</span>
-                      <div className="flex items-center bg-white rounded-full cursor-pointer">
-                        <AddIcon
-                          className="m-1"
-                          style={{ fontSize: "0.8rem" }}
-                        />
-                      </div>
-                    </div>
-                  </td>
-                  <td className="p-2 w-1/4 md:w-1/6">₹1200</td>
-                </tr>
+                {cartData?.cart?.items &&
+                  cartData?.cart?.items.map((item: any) => (
+                    <tr className="text-sm">
+                      <td className="p-2 flex items-center gap-2">
+                        <CloseIcon className="cursor-pointer" />
+                        <div className="flex items-center gap-2">
+                          <div
+                            className="flex items-center justify-center bg-[#f5f5f5] rounded-xl cursor-pointer"
+                            style={{ height: "50px", width: "50px" }}
+                          >
+                            <Image
+                              src={products[item?.id]?.images[0]?.url}
+                              alt="Product Image"
+                              height={40}
+                              width={60}
+                              className="object-contain"
+                            />
+                          </div>
+                          <div className="flex flex-col justify-between gap-1 w-3/4 md:w-4/5">
+                            <span className="text-sm text-[#969696]">
+                              {products[item?.id]?.category}
+                            </span>
+                            <span className="text-base text-black">
+                              {truncateText(
+                                "Corsair Spec-Delta RGB(ATX) Mid Tower Cabinet",
+                                30
+                              )}
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="p-2 w-1/4 md:w-1/6">
+                        {products[item?.id]?.discountAmount}
+                      </td>
+                      <td className="p-2 w-1/4 md:w-1/6">
+                        <div className="flex items-center gap-3 p-2 w-fit bg-[#EEEEEE] rounded-full text-[#1C5356]">
+                          <div className="flex items-center bg-white rounded-full cursor-pointer">
+                            <RemoveIcon
+                              className="m-1"
+                              style={{ fontSize: "0.8rem" }}
+                            />
+                          </div>
+                          <span className="text-base font-medium">
+                            {item.numOfItems}
+                          </span>
+                          <div className="flex items-center bg-white rounded-full cursor-pointer">
+                            <AddIcon
+                              className="m-1"
+                              style={{ fontSize: "0.8rem" }}
+                            />
+                          </div>
+                        </div>
+                      </td>
+                      <td className="p-2 w-1/4 md:w-1/6">₹1200</td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

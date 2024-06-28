@@ -30,10 +30,10 @@ const Index = () => {
   useEffect(() => {
     if (userData) {
       setFormdata({
-        name: userData.name,
-        email: userData.email,
-        phone: userData.phone,
-        avatar: userData.avatar?.url || null,
+        name: userData?.name,
+        email: userData?.email,
+        phone: userData?.phone,
+        avatar: userData?.avatar?.url || null,
       });
     }
   }, [userData]);

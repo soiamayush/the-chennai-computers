@@ -21,7 +21,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
-import { product } from "@/slice/product";
+import { cartHandler, product } from "@/slice/product";
 
 const productData = [
   { image: cpu },
@@ -32,20 +32,21 @@ const productData = [
 
 const Index = () => {
   const [index, setIndex] = useState(0);
+  const [itemData, setItemData] = useState<any>();
   const [showData, setShowData] = useState<any>(0);
   const router = useRouter();
   const { id } = router.query;
 
   const handlePrev = () => {
     if (index == 0) {
-      setIndex(productData.length - 1);
+      setIndex(itemData.images.length - 1);
     } else {
       setIndex(index - 1);
     }
   };
 
   const handleNext = () => {
-    if (index == productData.length - 1) {
+    if (index == itemData.images.length - 1) {
       setIndex(0);
     } else {
       setIndex(index + 1);
@@ -58,29 +59,52 @@ const Index = () => {
   const handleCart = (text: string) => {
     if (text === "addtocart") {
       notify();
+      const payload: any = {
+        type: "add",
+        itemsNumber: stock,
+        id,
+      };
+      dispatch(cartHandler(payload));
       setCartText("Go to cart");
     } else if ("gotocart") {
       router.push("/cart");
     }
   };
 
-  const [productData, setProductData] = useState<any>();
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     if (id) {
       dispatch(product(id)).then((res: any) => {
-        console.log(res);
+        setItemData(res.payload.product);
+        console.log(res.payload);
       });
     }
   }, [id]);
+
+  const [stock, setStock] = useState<any>(1);
+  const hanleStock = (type: string) => {
+    if (type === "minus") {
+      if (stock === 1) {
+        toast.warning("item can't be 0");
+      } else {
+        setStock(stock - 1);
+      }
+    } else {
+      if (stock == itemData.stock) {
+        toast.warning("The Seller doesn't this much items!!");
+      } else {
+        setStock(stock + 1);
+      }
+    }
+  };
 
   return (
     <div>
       <CustomeNavbar />
       <PageDetails
         title={"Shop"}
-        tag={"Home / Gaming CPU / Crosshair RBG CPU"}
+        tag={`Home / ${itemData?.category} / ${itemData?.name}`}
       />
       <div className="flex flex-col md:flex-row gap-6 justify-between  p-6 px-10">
         <div className="w-full md:w-2/5 gap-6 flex flex-col">
@@ -89,7 +113,7 @@ const Index = () => {
             style={{ height: "400px" }}
           >
             <Image
-              src={productData[index].image}
+              src={itemData?.images[index]?.url}
               className="object-contain"
               alt=""
               height={300}
@@ -114,8 +138,8 @@ const Index = () => {
           </div>
 
           <div className="flex justify-between gap-2">
-            {productData &&
-              productData.map((product: any, index: any) => (
+            {itemData &&
+              itemData.images.map((product: any, index: any) => (
                 <div
                   key={index}
                   onClick={() => setIndex(index)}
@@ -123,7 +147,7 @@ const Index = () => {
                   style={{ height: "100px", width: "100px" }}
                 >
                   <Image
-                    src={product.image}
+                    src={product.url}
                     alt=""
                     height={50}
                     width={80}
@@ -135,30 +159,36 @@ const Index = () => {
         </div>
 
         <div className="w-full md:w-3/5  flex flex-col gap-4 items-start">
-          <span className="text-[#969696] font-semibold text-sm">Cabinet</span>
+          <span className="text-[#969696] font-semibold text-sm">
+            {itemData?.category}
+          </span>
           <span className="text-black text-lg md:text-xl font-semibold ">
-            CORSAIR SPEC-DELTA RGB (ATX) MID TOWER CABINET
+            {itemData?.name}
           </span>
           <div className="flex gap-2 items-center text-base font-medium">
-            <span className="">₹5,999</span>
-            <span className="text-[#B7B3B3] line-through">₹10,000</span>
+            <span className="">₹{itemData?.discountAmount}</span>
+            <span className="text-[#B7B3B3] line-through">
+              ₹{itemData?.price}
+            </span>
           </div>
-          <span className="text-[#969696] font-medium text-sm">
+          {/* <span className="text-[#969696] font-medium text-sm">
             SKU : SNFNEWI3245
-          </span>
+          </span> */}
           <span className="text-[#969696] font-normal text-sm">
-            The Ant Esports ICE-590TG Gaming Cabinet is a true marvel for gamers
-            and enthusiasts seeking the ultimate blend of style, performance,
-            and customization. This meticulously designed cabinet boasts a
-            remarkable cooling system, featuring four pre-installed 120mm ARGB
-            fans that illuminate your gaming setup with mesmerizing colors.
+            {itemData?.description}
           </span>
           <div className="flex gap-3 p-2 w-fit bg-[#EEEEEE] rounded-full items-center text-[#1C5356]">
-            <div className="rounded-full  flex items-center bg-white cursor-pointer">
+            <div
+              className="rounded-full  flex items-center bg-white cursor-pointer"
+              onClick={() => hanleStock("minus")}
+            >
               <RemoveIcon className="m-1" style={{ fontSize: "0.8rem" }} />
             </div>
-            <span className="text-base font-medium">1</span>
-            <div className="rounded-full  flex items-center bg-white cursor-pointer">
+            <span className="text-base font-medium">{stock}</span>
+            <div
+              className="rounded-full  flex items-center bg-white cursor-pointer"
+              onClick={() => hanleStock("plus")}
+            >
               <AddIcon className="m-1" style={{ fontSize: "0.8rem" }} />
             </div>
           </div>
@@ -231,25 +261,9 @@ const Index = () => {
         {showData === 0 && (
           <div className="flex flex-col gap-2 justify-center w-full sm:w-4/5 mx-auto">
             <span className="text-sm font-medium text-[#515151]">
-              The Ant Esports ICE-590TG Gaming Cabinet is a true marvel for
-              gamers and enthusiasts seeking the ultimate blend of style,
-              performance, and customization. This meticulously designed cabinet
-              boasts a remarkable cooling system, featuring four pre-installed
-              120mm ARGB fans that illuminate your gaming setup with mesmerizing
-              colors. With the capacity to accommodate a whopping twelve 120mm
-              fans in total, the ICE-590TG ensures your rig stays cool even
-              during the most intense gaming sessions. Versatility is at the
-              heart of this gaming cabinet, offering flexibility in storage
-              configurations. Seamlessly fitting up to three HDDs and one SSD,
-              or three SSDs and one HDD, it ensures your storage needs are
-              effortlessly met. The support for EATX motherboards opens up a
-              world of possibilities for high-performance setups, while the
-              ability to house a 360mm radiator on top allows for advanced
-              liquid cooling solutions. CPU air coolers up to 164mm in height
-              find a perfect home here, providing efficient cooling for your
-              high-performance processors.
+              {itemData?.description}
             </span>
-            <Image className="w-full " src={productdesc} alt="" />
+            {/* <Image className="w-full " src={productdesc} alt="" />
             <span className="text-sm font-medium text-[#515151]">
               Incorporating a thoughtful design for optimal airflow, the
               ICE-590TG showcases side vents that enhance ventilation, keeping
@@ -260,7 +274,7 @@ const Index = () => {
               gaming experience with the Ant Esports ICE-590TG Gaming Cabinet,
               where innovation meets style, and performance knows no bounds.
             </span>
-            <Image className="w-full " src={productsdesc} alt="" />
+            <Image className="w-full " src={productsdesc} alt="" /> */}
           </div>
         )}
         {showData === 1 && (
@@ -335,7 +349,7 @@ const Index = () => {
           </div>
         )}
       </div>
-      <Related />
+      {/* <Related /> */}
       <Label />
       <Footer />
     </div>

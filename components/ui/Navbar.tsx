@@ -55,7 +55,7 @@ const Navbar = () => {
             <span className=" text-sm font-medium">
               {userData ? (
                 <span onClick={() => navigate.push("/userprofile")}>
-                  {userData.name.split(" ")[0]}
+                  {userData?.name?.split(" ")[0]}
                 </span>
               ) : (
                 <span onClick={() => navigate.push("/login")}>Account</span>
