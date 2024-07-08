@@ -1,11 +1,13 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slice/auth";
 import productReducer from "./slice/product";
+import orderReducer from "./slice/order";
 
 const store = configureStore({
   reducer: {
     user: userReducer,
     product: productReducer,
+    order: orderReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

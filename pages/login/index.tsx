@@ -9,7 +9,7 @@ import google from "@/public/google.svg";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "@/slice/auth";
+import { loaduser, loginUser } from "@/slice/auth";
 import { AppDispatch } from "@/store";
 
 const Index: React.FC = () => {
@@ -38,6 +38,9 @@ const Index: React.FC = () => {
       .then(() => {
         router.push("/");
         toast.success("Login success!!");
+      })
+      .then(() => {
+        dispatch(loaduser());
       })
       .catch((error) => toast.error(error.message));
   };

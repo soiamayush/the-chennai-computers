@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:4000/api/v1",
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
   withCredentials: true, // If you are using cookies for authentication
 });
 

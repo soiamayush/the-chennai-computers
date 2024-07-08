@@ -19,7 +19,7 @@ import Footer from "@/components/ui/Footer";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store";
 import { cartHandler, product } from "@/slice/product";
 
@@ -31,6 +31,7 @@ const productData = [
 ];
 
 const Index = () => {
+  const { userData }: any = useSelector((state: any) => state.user);
   const [index, setIndex] = useState(0);
   const [itemData, setItemData] = useState<any>();
   const [showData, setShowData] = useState<any>(0);
@@ -57,21 +58,33 @@ const Index = () => {
   const notify = () => toast.success("Item has been added to cart!!");
 
   const handleCart = (text: string) => {
-    if (text === "addtocart") {
-      notify();
-      const payload: any = {
-        type: "add",
-        itemsNumber: stock,
-        id,
-      };
-      dispatch(cartHandler(payload));
-      setCartText("Go to cart");
-    } else if ("gotocart") {
-      router.push("/cart");
+    if (userData) {
+      if (text === "addtocart") {
+        notify();
+        const payload: any = {
+          type: "add",
+          itemsNumber: stock,
+          id,
+        };
+        dispatch(cartHandler(payload));
+        setCartText("Go to cart");
+      } else if ("gotocart") {
+        router.push("/cart");
+      }
+    } else {
+      toast.warning("Login first to add product in cart!!");
     }
   };
 
   const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    if (userData) console.log(userData?.cart?.items);
+    const productFind = userData?.cart?.items.filter(
+      (item: any) => item.id === id
+    );
+    console.log(productFind);
+    if (productFind?.length) setCartText("Go to cart");
+  }, [userData]);
 
   useEffect(() => {
     if (id) {

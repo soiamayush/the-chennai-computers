@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import logo from "@/public/logo.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -9,7 +10,12 @@ import { useSelector } from "react-redux";
 
 const CustomeNavbar = () => {
   const navigate = useRouter();
+  const { cartData } = useSelector((state: any) => state.product); // Replace with actual selector path
   const { userData } = useSelector((state: any) => state.user);
+  const [cartLength, setCartLength] = useState(0);
+  useEffect(() => {
+    setCartLength(cartData?.cart?.items.length);
+  }, [cartData, userData]);
   return (
     <div className="w-full">
       <div className="flex shadow-xl justify-between px-6 py-2 items-center w-full border-b border-b-[#C9C9C9]">
@@ -36,10 +42,13 @@ const CustomeNavbar = () => {
         </div>
 
         <div className="w-1/4 flex justify-center items-center gap-4">
-          <div className="relative cursor-pointer">
+          <div
+            className="relative cursor-pointer"
+            onClick={() => navigate.push("/cart")}
+          >
             <ShoppingCartIcon className="" />
             <span className="text-white absolute -top-1 -right-2 bg-[#FFBA35] text-xs rounded-full px-1">
-              0
+              {cartLength}
             </span>
           </div>
           <div

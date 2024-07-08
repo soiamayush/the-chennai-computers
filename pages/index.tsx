@@ -7,13 +7,14 @@ import Footer from "@/components/ui/Footer";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { useEffect } from "react";
-import { AllProduct } from "@/slice/product";
+import { AllProduct, getcart } from "@/slice/product";
 
 export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(AllProduct({}));
+    dispatch(getcart());
   }, []);
 
   return (

@@ -14,16 +14,14 @@ import { toast } from "react-toastify";
 interface FormData {
   name: string;
   email: string;
-  phone: string;
   avatar: string | null;
 }
 
 const Index = () => {
   const { userData } = useSelector((state: any) => state.user);
-  const [formdata, setFormdata] = useState<FormData>({
+  const [formdata, setFormdata] = useState<any>({
     name: "",
     email: "",
-    phone: "",
     avatar: null,
   });
 
@@ -32,7 +30,6 @@ const Index = () => {
       setFormdata({
         name: userData?.name,
         email: userData?.email,
-        phone: userData?.phone,
         avatar: userData?.avatar?.url || null,
       });
     }
@@ -65,7 +62,7 @@ const Index = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setFormdata((prevState) => ({
+        setFormdata((prevState: any) => ({
           ...prevState,
           avatar: reader.result as string,
         }));
@@ -76,7 +73,7 @@ const Index = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormdata((prevState) => ({
+    setFormdata((prevState: any) => ({
       ...prevState,
       [name]: value,
     }));
@@ -139,19 +136,7 @@ const Index = () => {
             onChange={handleInputChange}
           />
         </div>
-        <div className="w-full flex flex-col gap-2">
-          <span className="text-[#4d4d4d] font-semibold text-lg sm:text-xl">
-            Phone Number*
-          </span>
-          <input
-            className="rounded-lg p-3 text-base font-semibold text-black focus:outline-none border border-[#C9C9C9]"
-            placeholder="Enter your phone number"
-            name="phone"
-            type="number"
-            value={formdata.phone}
-            onChange={handleInputChange}
-          />
-        </div>
+
         <button
           onClick={handleUpdate}
           className="text-lg font-semibold p-4 w-fit px-6 text-white rounded-full bg-[#1C5356]"

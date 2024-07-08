@@ -8,7 +8,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import google from "@/public/google.svg";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { RegisterUser } from "@/slice/auth";
+import { RegisterUser, loaduser } from "@/slice/auth";
 import { AppDispatch } from "@/store";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -96,6 +96,9 @@ const Index = () => {
       .then(() => {
         router.push("/");
         toast.success("User registered successfully!!");
+      })
+      .then(() => {
+        dispatch(loaduser());
       })
       .catch((error) => {
         setFormdata({

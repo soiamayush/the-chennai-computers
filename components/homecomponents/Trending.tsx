@@ -16,12 +16,13 @@ const Trending = () => {
       <span className="text-xl md:text-3xl text-[#1C5356] font-semibold">
         Trending Products
       </span>
-      <div className="flex  gap-8 flex-wrap justify-center sm:justify-between">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center">
         {allProduct?.products &&
           allProduct?.products.map((product: any) => (
             <Card cardData={product} key={product._id} />
           ))}
       </div>
+
       <div className="w-full flex justify-end">
         <div
           onClick={() => router.push("/shop")}

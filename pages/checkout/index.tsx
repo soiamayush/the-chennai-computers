@@ -1,5 +1,5 @@
 // index.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomeNavbar from "@/components/ui/CustomeNavbar";
 import PageDetails from "@/components/ui/PageDetails";
 import Modal from "./Modal";
@@ -9,6 +9,11 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Footer from "@/components/ui/Footer";
 import Label from "@/components/ui/Label";
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { orderDetails } from "@/slice/product";
+import { AppDispatch } from "@/store";
+import { toast } from "react-toastify";
+import { orderSave } from "@/slice/order";
 
 const Index = () => {
   const [showStateModal, setShowStateModal] = useState(false);
@@ -16,8 +21,9 @@ const Index = () => {
   const [selectedState, setSelectedState] = useState<string>("");
   const [selectedCity, setSelectedCity] = useState<string>("");
   const [availableCities, setAvailableCities] = useState<string[]>([]);
-
+  const { orderData }: any = useSelector((state: any) => state.product);
   const navigate = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleStateClick = () => {
     setShowStateModal(true);
@@ -49,6 +55,54 @@ const Index = () => {
     closeCityModal();
   };
 
+  const [paymentDetails, setPaymentDetails] = useState<any>(null);
+  useEffect(() => {
+    if (orderData) {
+      setPaymentDetails(orderData);
+    }
+    dispatch(orderDetails())
+      .unwrap()
+      .then((res) => {
+        setPaymentDetails(res);
+      })
+      .catch((err) => toast.error(err.message));
+  }, []);
+
+  const [street, setStreet] = useState("");
+  const [zip, setZip] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [landmark, setLandmark] = useState("");
+  const [phoneNo, setPhoneno] = useState("");
+
+  const submitOrderDetails = () => {
+    const orderDetails = {
+      street,
+      landmark,
+      postalCode: zip,
+      city: selectedCity,
+      state: selectedState,
+      phoneNo,
+      paymentDetails,
+    };
+
+    if (
+      !street ||
+      !zip ||
+      !selectedState ||
+      !selectedCity ||
+      !landmark ||
+      !phoneNo
+    ) {
+      toast.error("All fields are required");
+      return;
+    }
+
+    sessionStorage.setItem("orderDetails", JSON.stringify(orderDetails));
+    console.log(orderDetails);
+    navigate.push("/billing");
+  };
+
   return (
     <div>
       <CustomeNavbar />
@@ -67,6 +121,7 @@ const Index = () => {
               className="border w-full p-3 md:pr-6 border-[#C9C9C9] rounded-lg text-black text-base  focus:outline-none font-medium"
               placeholder="Enter Street Address 1"
               name="address"
+              onChange={(e) => setStreet(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -77,6 +132,7 @@ const Index = () => {
               className="border w-full p-3 md:pr-6 border-[#C9C9C9] rounded-lg text-black text-base  focus:outline-none font-medium"
               placeholder="Enter Landmark"
               name="address"
+              onChange={(e) => setLandmark(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -89,6 +145,7 @@ const Index = () => {
                 value={selectedState}
                 onClick={handleStateClick}
                 readOnly
+                onChange={(e) => setState(e.target.value)}
               />
               <ExpandMoreIcon className="text-[#C9C9C9] mx-2" />
             </div>
@@ -108,6 +165,7 @@ const Index = () => {
                 value={selectedCity}
                 onClick={handleCityClick}
                 readOnly
+                onChange={(e) => setState(e.target.value)}
               />
               <ExpandMoreIcon className="text-[#C9C9C9] mx-2" />
             </div>
@@ -128,6 +186,20 @@ const Index = () => {
               name="address"
               type="number"
               maxLength={6}
+              onChange={(e) => setZip(e.target.value)}
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <span className="text-sm md:text-base font-semibold ">
+              Phone Number*
+            </span>
+            <input
+              className="border w-full p-3 md:pr-6 border-[#C9C9C9] rounded-lg text-black text-base focus:outline-none font-medium"
+              placeholder="Enter phone number"
+              name="address"
+              type="number"
+              maxLength={6}
+              onChange={(e) => setPhoneno(e.target.value)}
             />
           </div>
         </div>
@@ -136,43 +208,53 @@ const Index = () => {
           <div className="border w-full border-[#cececf]"></div>
           <div className="flex justify-between gap-3">
             <span className="text-sm font-semibold text-[#787878]">Items</span>
-            <span className="text-sm font-semibold text-[#444444]">5</span>
+            <span className="text-sm font-semibold text-[#444444]">
+              {paymentDetails?.cartLen}
+            </span>
           </div>
           <div className="flex justify-between gap-3">
             <span className="text-sm font-semibold text-[#787878]">
               Sub Total
             </span>
             <span className="text-sm font-semibold text-[#444444]">
-              ₹24,500
+              ₹{paymentDetails?.subtotal}
             </span>
           </div>
           <div className="flex justify-between gap-3">
             <span className="text-sm font-semibold text-[#787878]">
               Shipping
             </span>
-            <span className="text-sm font-semibold text-[#444444]">₹00</span>
+            <span className="text-sm font-semibold text-[#444444]">
+              {`₹ ${
+                paymentDetails?.shippingPrice === 0
+                  ? 0
+                  : paymentDetails?.shippingPrice
+              }`}
+            </span>
           </div>
           <div className="flex justify-between gap-3">
             <span className="text-sm font-semibold text-[#787878]">Tax</span>
-            <span className="text-sm font-semibold text-[#444444]">₹3,450</span>
+            <span className="text-sm font-semibold text-[#444444]">
+              ₹{paymentDetails?.tax.toFixed(2)}
+            </span>
           </div>
           <div className="flex justify-between gap-3">
             <span className="text-sm font-semibold text-[#787878]">
               Coupon Discount
             </span>
             <span className="text-sm font-semibold text-[#444444]">
-              -₹17,500
+              -₹{paymentDetails?.couponDiscount}
             </span>
           </div>
           <div className="border w-full border-[#cececf]"></div>
           <div className="flex justify-between gap-3">
             <span className="text-sm font-semibold text-[#000000]">Total</span>
             <span className="text-sm font-semibold text-[#000000]">
-              ₹10,450
+              ₹{paymentDetails?.subtotal}
             </span>
           </div>
           <button
-            onClick={() => navigate.push("/billing")}
+            onClick={submitOrderDetails}
             className="bg-[#FFBA35] text-base text-[#1C5356] flex items-center justify-center p-2 rounded-full font-semibold"
           >
             Proceed to Pay

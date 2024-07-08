@@ -33,9 +33,9 @@ const Card = ({ cardData }: any) => {
           {truncate(cardData?.name)}
         </span>
         <div className="flex gap-2 items-center text-sm font-medium">
-          <span className="">₹{cardData?.price}</span>
+          <span className="">₹{cardData?.discountAmount}</span>
           <span className="text-[#B7B3B3] line-through">
-            ₹{cardData?.discountAmount}
+            ₹{cardData?.price}
           </span>
         </div>
       </div>

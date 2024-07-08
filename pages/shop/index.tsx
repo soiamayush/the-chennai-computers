@@ -10,18 +10,26 @@ import Card from "@/components/ui/Card";
 import Paginate from "@/components/ui/Pagination";
 import Footer from "@/components/ui/Footer";
 import Label from "@/components/ui/Label";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
 import { AllProduct } from "@/slice/product";
 import useStore from "@/store/states";
 
 const Index: React.FC = () => {
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
+  const params = useSearchParams();
+  const category = params.get("category");
+
+  useEffect(() => {
+    if (category) setSelectedCategories([category]);
+  }, [category]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showmodal, setShowmodal] = useState<boolean>(false);
   const [filters, setFilters] = useState<string[]>([]);
   const [valueA, setValueA] = useState<number>(500);
-  const [valueB, setValueB] = useState<number>(500000);
+  const [valueB, setValueB] = useState<number>(50000);
   const [totalPage, setTotalPage] = useState(1);
   const [sorting, setSorting] = useState("");
 
@@ -73,10 +81,18 @@ const Index: React.FC = () => {
         return prevFilters.filter((filter) => filter !== value);
       }
     });
+
+    setSelectedCategories((prevCategories) => {
+      if (checked) {
+        return [...prevCategories, value];
+      } else {
+        return prevCategories.filter((category) => category !== value);
+      }
+    });
   };
 
   const handleRangeChange = (valueA: number, valueB: number) => {
-    if (valueA !== 500 || valueB !== 500000) {
+    if (valueA !== 500 || valueB !== 50000) {
       setFilters((prevFilters) => {
         const rangeFilter = `₹${Math.min(valueA, valueB)} - ₹${Math.max(
           valueB,
@@ -107,12 +123,12 @@ const Index: React.FC = () => {
             keyword: searchText,
             currentPage,
             sorting: sorting,
+            categories: [""],
           })
         )
           .unwrap()
           .then((res) => {
             setProducts(res.products);
-            console.log(res);
             setTotalPage(Math.ceil(res.productsCount / res.resPerPage));
             setTotalCount(res.productsCount);
             setData(res);
@@ -123,117 +139,142 @@ const Index: React.FC = () => {
     };
 
     fetchData();
-  }, [filters, currentPage, sorting]);
+    console.log(selectedCategories);
+  }, [filters, currentPage, sorting, searchText, category, selectedCategories]);
 
   return (
     <div>
       <CustomeNavbar />
-      <PageDetails title="Shop" tag="Home / Gaming CPU" isSearch={true} />
+      <PageDetails title="Shop" tag="Home / Shop" isSearch={true} />
       <div className="flex gap-3 p-4 ">
         <div className=" hidden md:flex flex-col gap-4 w-1/4 lg:w-1/5">
           <span className="text-xl md:text-2xl font-semibold px-2">
             Filter Options
           </span>
           <div className="border-y border-y-[#c3c3c3] p-2 py-4 flex flex-col gap-2">
-            <span className="text-xl font-semibold text-[#292929]">Brands</span>
+            <span className="text-xl font-semibold text-[#292929]">
+              Categories
+            </span>
             <div className="flex flex-col gap-2 max-h-52 scrollbar-vertical-thin overflow-y-auto">
               <div className="flex gap-2 items-center">
                 <input
                   className="checkbox-custom cursor-pointer"
                   type="checkbox"
-                  value="Cross Hair"
+                  value="Desktop Computers"
                   onChange={handleCheckboxChange}
                 />
                 <label className="text-[#545454] font-semibold text-sm">
-                  Cross Hair
+                  Desktop Computers
                 </label>
               </div>
               <div className="flex gap-2 items-center">
                 <input
                   className="checkbox-custom cursor-pointer"
                   type="checkbox"
-                  value="Razor"
+                  value="Laptops"
                   onChange={handleCheckboxChange}
                 />
                 <label className="text-[#545454] font-semibold text-sm">
-                  Razor
+                  Laptops
                 </label>
               </div>
               <div className="flex gap-2 items-center">
                 <input
                   className="checkbox-custom cursor-pointer"
                   type="checkbox"
-                  value="AMD"
+                  value="Tablets"
                   onChange={handleCheckboxChange}
                 />
                 <label className="text-[#545454] font-semibold text-sm">
-                  AMD
+                  Tablets
                 </label>
               </div>
               <div className="flex gap-2 items-center">
                 <input
                   className="checkbox-custom cursor-pointer"
                   type="checkbox"
-                  value="Ant Esport"
+                  value="Monitors"
                   onChange={handleCheckboxChange}
                 />
                 <label className="text-[#545454] font-semibold text-sm">
-                  Ant Esport
+                  Monitors
                 </label>
               </div>
               <div className="flex gap-2 items-center">
                 <input
                   className="checkbox-custom cursor-pointer"
                   type="checkbox"
-                  value="Zebronics"
+                  value="Storage Devices"
                   onChange={handleCheckboxChange}
                 />
                 <label className="text-[#545454] font-semibold text-sm">
-                  Zebronics
+                  Storage Devices
                 </label>
               </div>
               <div className="flex gap-2 items-center">
                 <input
                   className="checkbox-custom cursor-pointer"
                   type="checkbox"
-                  value="Razor"
+                  value="Input Devices"
                   onChange={handleCheckboxChange}
                 />
                 <label className="text-[#545454] font-semibold text-sm">
-                  Razor
+                  Input Devices
                 </label>
               </div>
               <div className="flex gap-2 items-center">
                 <input
                   className="checkbox-custom cursor-pointer"
                   type="checkbox"
-                  value="AMD"
+                  value="Output Devices"
                   onChange={handleCheckboxChange}
                 />
                 <label className="text-[#545454] font-semibold text-sm">
-                  AMD
+                  Output Devices
                 </label>
               </div>
               <div className="flex gap-2 items-center">
                 <input
                   className="checkbox-custom cursor-pointer"
                   type="checkbox"
-                  value="Ant Esport"
+                  value="Networking Equipment"
                   onChange={handleCheckboxChange}
                 />
                 <label className="text-[#545454] font-semibold text-sm">
-                  Ant Esport
+                  Networking Equipment
                 </label>
               </div>
               <div className="flex gap-2 items-center">
                 <input
                   className="checkbox-custom cursor-pointer"
                   type="checkbox"
-                  value="Zebronics"
+                  value="Components"
                   onChange={handleCheckboxChange}
                 />
                 <label className="text-[#545454] font-semibold text-sm">
-                  Zebronics
+                  Components
+                </label>
+              </div>
+              <div className="flex gap-2 items-center">
+                <input
+                  className="checkbox-custom cursor-pointer"
+                  type="checkbox"
+                  value="Peripherals"
+                  onChange={handleCheckboxChange}
+                />
+                <label className="text-[#545454] font-semibold text-sm">
+                  Peripherals
+                </label>
+              </div>
+              <div className="flex gap-2 items-center">
+                <input
+                  className="checkbox-custom cursor-pointer"
+                  type="checkbox"
+                  value="Software"
+                  onChange={handleCheckboxChange}
+                />
+                <label className="text-[#545454] font-semibold text-sm">
+                  Software
                 </label>
               </div>
             </div>
@@ -245,7 +286,7 @@ const Index: React.FC = () => {
             <div className="max-w-fit flex flex-wrap items-center justify-center">
               <RangeComponent
                 min={500}
-                max={500000}
+                max={50000}
                 step={1}
                 dual
                 valueA={valueA}
@@ -329,7 +370,9 @@ const Index: React.FC = () => {
             {filters.length !== 0 && (
               <span
                 className="text-sm cursor-pointer underline font-medium text-[#4d4d4d]"
-                onClick={() => setFilters([])}
+                onClick={() => {
+                  setFilters([]), setSelectedCategories([]);
+                }}
               >
                 Clear All
               </span>

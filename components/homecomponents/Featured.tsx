@@ -13,26 +13,126 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 const featuredData = [
-  { image: featured1, title: "HD Monitor", numOfProducts: 20 },
-  { image: keyboard, title: "HD Monitor", numOfProducts: 20 },
-  { image: gpu, title: "HD Monitor", numOfProducts: 20 },
-  { image: mouse, title: "HD Monitor", numOfProducts: 20 },
-  { image: cpu, title: "HD Monitor", numOfProducts: 20 },
-  { image: featured1, title: "HD Monitor", numOfProducts: 20 },
-  { image: keyboard, title: "HD Monitor", numOfProducts: 20 },
-  { image: gpu, title: "HD Monitor", numOfProducts: 20 },
-  { image: mouse, title: "HD Monitor", numOfProducts: 20 },
-  { image: cpu, title: "HD Monitor", numOfProducts: 20 },
-  { image: featured1, title: "HD Monitor", numOfProducts: 20 },
-  { image: keyboard, title: "HD Monitor", numOfProducts: 20 },
-  { image: gpu, title: "HD Monitor", numOfProducts: 20 },
-  { image: mouse, title: "HD Monitor", numOfProducts: 20 },
-  { image: cpu, title: "HD Monitor", numOfProducts: 20 },
-  { image: featured1, title: "HD Monitor", numOfProducts: 20 },
-  { image: keyboard, title: "HD Monitor", numOfProducts: 20 },
-  { image: gpu, title: "HD Monitor", numOfProducts: 20 },
-  { image: mouse, title: "HD Monitor", numOfProducts: 20 },
-  { image: cpu, title: "HD Monitor", numOfProducts: 20 },
+  {
+    image: featured1,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: keyboard,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: gpu,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: mouse,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: cpu,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: featured1,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: keyboard,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: gpu,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: mouse,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: cpu,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: featured1,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: keyboard,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: gpu,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: mouse,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: cpu,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: featured1,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: keyboard,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: gpu,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: mouse,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
+  {
+    image: cpu,
+    title: "HD Monitor",
+    numOfProducts: 20,
+    category: "accessories",
+  },
 ];
 
 const Featured = () => {
@@ -106,7 +206,11 @@ const Featured = () => {
       <div className="py-6 flex container-carousel gap-8 max-w-screen overflow-x-auto hide-horizontal-scrollbar">
         {featuredData &&
           featuredData.map((card, index) => (
-            <FeaturedCard key={index} card={card} />
+            <FeaturedCard
+              key={index}
+              card={card}
+              link={`/shop?category=${card?.category}`}
+            />
           ))}
       </div>
       <div className="flex gap-1 justify-center items-center w-full">
