@@ -89,7 +89,7 @@ const Navbar = () => {
           <MenuIcon />
           Browse All Categories
           {isOpen && (
-            <div className="dropdown-content absolute bg-white shadow-md mt-5 top-0 w-48 z-30">
+            <div className="dropdown-content absolute bg-white shadow-md rounded-lg mt-5 top-0 w-48 z-30">
               <div className="p-2 hover:bg-gray-100">Desktop Computers</div>
               <div className="p-2 hover:bg-gray-100">Laptops</div>
               <div className="p-2 hover:bg-gray-100">Tablets</div>
@@ -121,21 +121,30 @@ const Navbar = () => {
               Shop By Brands <ExpandMoreIcon />
             </span>
             {isDropdownOpen && (
-              <div className="absolute bg-white shadow-md mt-5 top-0 w-48">
-                <div className="p-2 hover:bg-gray-100 cursor-pointer">
-                  Brand A
+              <div className="absolute bg-white shadow-md rounded-lg mt-5 top-0 w-48">
+                <div
+                  className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                  onClick={() => navigate.push("/shop")}
+                >
+                  AMD
                 </div>
-                <div className="p-2 hover:bg-gray-100 cursor-pointer">
-                  Brand B
+                <div
+                  className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                  onClick={() => navigate.push("/shop")}
+                >
+                  Ant Esports
                 </div>
-                <div className="p-2 hover:bg-gray-100 cursor-pointer">
-                  Brand C
+                <div
+                  className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                  onClick={() => navigate.push("/shop")}
+                >
+                  Deepcool
                 </div>
-                <div className="p-2 hover:bg-gray-100 cursor-pointer">
-                  Brand D
-                </div>
-                <div className="p-2 hover:bg-gray-100 cursor-pointer">
-                  Brand E
+                <div
+                  className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                  onClick={() => navigate.push("/shop")}
+                >
+                  Corsair
                 </div>
               </div>
             )}
@@ -150,22 +159,37 @@ const Navbar = () => {
               Accessories <ExpandMoreIcon />
             </span>
             {isAccessoriesOpen && (
-              <div className="absolute bg-white shadow-md mt-1 w-48">
-                <div className="p-2 hover:bg-gray-100 cursor-pointer">
-                  Accessory 1
+              <div className="absolute bg-white shadow-md rounded-lg mt-1 w-48 z-30">
+                <div
+                  className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                  onClick={() => navigate.push("/shop")}
+                >
+                  RAM
                 </div>
-                <div className="p-2 hover:bg-gray-100 cursor-pointer">
-                  Accessory 2
+                <div
+                  className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                  onClick={() => navigate.push("/shop")}
+                >
+                  CPU
                 </div>
-                <div className="p-2 hover:bg-gray-100 cursor-pointer">
-                  Accessory 3
+                <div
+                  className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                  onClick={() => navigate.push("/shop")}
+                >
+                  Harddisk
+                </div>
+                <div
+                  className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                  onClick={() => navigate.push("/shop")}
+                >
+                  SSD
                 </div>
               </div>
             )}
           </div>
 
           {/* Printers Dropdown */}
-          <div className="relative">
+          {/* <div className="relative">
             <span
               className="text-sm font-medium cursor-pointer flex items-center"
               onMouseEnter={() => setIsPrintersOpen(true)}
@@ -174,19 +198,19 @@ const Navbar = () => {
               Printers <ExpandMoreIcon />
             </span>
             {isPrintersOpen && (
-              <div className="absolute bg-white shadow-md mt-1 w-48">
-                <div className="p-2 hover:bg-gray-100 cursor-pointer">
+              <div className="absolute bg-white shadow-md rounded-lg mt-1 w-48">
+                <div className="p-2 hover:bg-gray-100 cursor-pointer font-semibold">
                   Printer 1
                 </div>
-                <div className="p-2 hover:bg-gray-100 cursor-pointer">
+                <div className="p-2 hover:bg-gray-100 cursor-pointer font-semibold">
                   Printer 2
                 </div>
-                <div className="p-2 hover:bg-gray-100 cursor-pointer">
+                <div className="p-2 hover:bg-gray-100 cursor-pointer font-semibold">
                   Printer 3
                 </div>
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

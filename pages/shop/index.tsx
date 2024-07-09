@@ -379,7 +379,7 @@ const Index: React.FC = () => {
             )}
           </div>
 
-          <div className="flex flex-wrap justify-center sm:justify-between gap-3 p-2 max-h-[150vh] overflow-y-auto hide-horizontal-scrollbar">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-2 max-h-[150vh] overflow-y-auto hide-horizontal-scrollbar">
             {products &&
               products.map((product: any) => (
                 <Card cardData={product} key={product._id} />

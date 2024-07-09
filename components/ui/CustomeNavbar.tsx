@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useSelector } from "react-redux";
 
 const CustomeNavbar = () => {
@@ -13,6 +14,12 @@ const CustomeNavbar = () => {
   const { cartData } = useSelector((state: any) => state.product); // Replace with actual selector path
   const { userData } = useSelector((state: any) => state.user);
   const [cartLength, setCartLength] = useState(0);
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isAccessoriesOpen, setIsAccessoriesOpen] = useState(false); // State for Accessories dropdown
+  const [isPrintersOpen, setIsPrintersOpen] = useState(false);
   useEffect(() => {
     setCartLength(cartData?.cart?.items.length);
   }, [cartData, userData]);
@@ -25,20 +32,116 @@ const CustomeNavbar = () => {
           className=" w-1/3 sm:w-1/6 cursor-pointer"
           onClick={() => navigate.push("/")}
         />
+        <div className=" w-full  justify-start gap-10 flex items px-8 py-3 ">
+          <div className="hidden sm:flex gap-4">
+            <span
+              className="text-sm font-medium cursor-pointer flex items-center font"
+              onClick={() => navigate.push("/")}
+            >
+              Home
+            </span>
+            <div className="relative">
+              <span
+                className="text-sm font-medium cursor-pointer flex items-center"
+                onMouseEnter={() => setIsDropdownOpen(true)}
+                onMouseLeave={() => setIsDropdownOpen(false)}
+              >
+                {" "}
+                {/* Toggle dropdown on click */}
+                Shop By Brands <ExpandMoreIcon />
+              </span>
+              {isDropdownOpen && (
+                <div className="absolute bg-white shadow-md rounded-lg mt-5 top-0 w-48">
+                  <div
+                    className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                    onClick={() => navigate.push("/shop")}
+                  >
+                    AMD
+                  </div>
+                  <div
+                    className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                    onClick={() => navigate.push("/shop")}
+                  >
+                    Ant Esports
+                  </div>
+                  <div
+                    className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                    onClick={() => navigate.push("/shop")}
+                  >
+                    Deepcool
+                  </div>
+                  <div
+                    className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                    onClick={() => navigate.push("/shop")}
+                  >
+                    Corsair
+                  </div>
+                </div>
+              )}
+            </div>
+            {/* Accessories Dropdown */}
+            <div className="relative">
+              <span
+                className="text-sm font-medium cursor-pointer flex items-center"
+                onMouseEnter={() => setIsAccessoriesOpen(true)}
+                onMouseLeave={() => setIsAccessoriesOpen(false)}
+              >
+                Accessories <ExpandMoreIcon />
+              </span>
+              {isAccessoriesOpen && (
+                <div className="absolute bg-white shadow-md rounded-lg mt-1 w-48 z-30">
+                  <div
+                    className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                    onClick={() => navigate.push("/shop")}
+                  >
+                    RAM
+                  </div>
+                  <div
+                    className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                    onClick={() => navigate.push("/shop")}
+                  >
+                    CPU
+                  </div>
+                  <div
+                    className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                    onClick={() => navigate.push("/shop")}
+                  >
+                    Harddisk
+                  </div>
+                  <div
+                    className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                    onClick={() => navigate.push("/shop")}
+                  >
+                    SSD
+                  </div>
+                </div>
+              )}
+            </div>
 
-        <div className="hidden sm:flex gap-4">
-          <span className="text-sm font-medium cursor-pointer flex items-center font">
-            Home
-          </span>
-          <span className="text-sm font-medium cursor-pointer flex items-center font">
-            Shop By Brands <ExpandMoreIcon />
-          </span>
-          <span className="text-sm font-medium cursor-pointer flex items-center font">
-            Accessories <ExpandMoreIcon />
-          </span>
-          <span className="text-sm font-medium cursor-pointer flex items-center font">
-            Printers <ExpandMoreIcon />
-          </span>
+            {/* Printers Dropdown */}
+            {/* <div className="relative">
+            <span
+              className="text-sm font-medium cursor-pointer flex items-center"
+              onMouseEnter={() => setIsPrintersOpen(true)}
+              onMouseLeave={() => setIsPrintersOpen(false)}
+            >
+              Printers <ExpandMoreIcon />
+            </span>
+            {isPrintersOpen && (
+              <div className="absolute bg-white shadow-md rounded-lg mt-1 w-48">
+                <div className="p-2 hover:bg-gray-100 cursor-pointer font-semibold">
+                  Printer 1
+                </div>
+                <div className="p-2 hover:bg-gray-100 cursor-pointer font-semibold">
+                  Printer 2
+                </div>
+                <div className="p-2 hover:bg-gray-100 cursor-pointer font-semibold">
+                  Printer 3
+                </div>
+              </div>
+            )}
+          </div> */}
+          </div>
         </div>
 
         <div className="w-1/4 flex justify-center items-center gap-4">

@@ -20,11 +20,11 @@ const Herosection = () => {
                 Hurry Up Limited Time Offer Only!
               </span>
               <span className="text-white text-sm sm:text-2xl font-bold text-center sm:text-start">
-                Get Your Lighting Fast
-                <span className="text-[#FFBA35]"> Gaming CPU</span>
+                Offer: Up to 15% off on
+                <span className="text-[#FFBA35]"> laptops and accessories</span>
               </span>
               <button
-                onClick={() => router.push("/product")}
+                onClick={() => router.push("/shop")}
                 className="bg-[#FFBA35] text-xs sm:text-sm px-3 py-1 rounded-lg text-[#1C5356] font-medium w-fit"
               >
                 Shop now
@@ -41,15 +41,15 @@ const Herosection = () => {
           <div className="bg-[#1c5257] h-40 sm:h-72 rounded-lg w-full flex flex-col items-center justify-center p-3 py-4">
             <div className="flex flex-col gap-1 md:gap-2 items-center sm:items-start">
               <span className="text-white text-xs text-center sm:text-start">
-                Exclusively Faster
+                Buy a gaming PC and get a gaming accessory
               </span>
               <span className="text-white text-sm md:text-xl font-bold text-center sm:text-start">
-                Dragon Wired
-                <span className="text-[#FFBA35]"> Keyboard</span>
+                (mouse, keyboard, or headset)
+                <span className="text-[#FFBA35]"> for free</span>
               </span>
               <div
                 className="flex text-sm md:text-sm items-center gap-2 text-[#FFBA35] cursor-pointer"
-                onClick={() => router.push("/product")}
+                onClick={() => router.push("/shop")}
               >
                 Shop Now
                 <span className=" h-fit rounded-full bg-[#FFBA35] flex items-center text-[#1C5356]">
@@ -58,11 +58,6 @@ const Herosection = () => {
               </div>
             </div>
             <Image src={keyboard} alt="" className="w-3/4  hidden sm:flex" />
-            <Image
-              src={keyboard}
-              alt=""
-              className="w-3/4 md:-mt-4 hidden sm:flex"
-            />
           </div>
         </div>
         <div className="hidden md:flex flex-col gap-2 md:gap-3 w-1/4">
