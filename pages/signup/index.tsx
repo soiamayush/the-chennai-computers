@@ -211,12 +211,12 @@ const Index = () => {
           >
             {loading ? <span>Signing up...</span> : <span>Sign Up</span>}
           </button>
-          <div className="cursor-pointer border border-[#C9C9C9] rounded-lg p-2 flex justify-center items-center gap-2">
+          {/* <div className="cursor-pointer border border-[#C9C9C9] rounded-lg p-2 flex justify-center items-center gap-2">
             <Image src={google} alt="" className="" width={20} />
             <span className="text-black font-medium text-base">
               Sign up With Google
             </span>
-          </div>
+          </div> */}
           <span
             onClick={() => router.push("/login")}
             className="text-base w-full justify-center flex gap-2"

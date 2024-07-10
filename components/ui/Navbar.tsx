@@ -90,17 +90,78 @@ const Navbar = () => {
           Browse All Categories
           {isOpen && (
             <div className="dropdown-content absolute bg-white shadow-md rounded-lg mt-5 top-0 w-48 z-30">
-              <div className="p-2 hover:bg-gray-100">Desktop Computers</div>
-              <div className="p-2 hover:bg-gray-100">Laptops</div>
-              <div className="p-2 hover:bg-gray-100">Tablets</div>
-              <div className="p-2 hover:bg-gray-100">Monitors</div>
-              <div className="p-2 hover:bg-gray-100">Storage Devices</div>
-              <div className="p-2 hover:bg-gray-100">Input Devices</div>
-              <div className="p-2 hover:bg-gray-100">Output Devices</div>
-              <div className="p-2 hover:bg-gray-100">Networking Equipment</div>
-              <div className="p-2 hover:bg-gray-100">Components</div>
-              <div className="p-2 hover:bg-gray-100">Peripherals</div>
-              <div className="p-2 hover:bg-gray-100">Software</div>
+              <div
+                className="p-2 hover:bg-gray-100"
+                onClick={() =>
+                  navigate.push("/shop?category=Desktop%20Computers")
+                }
+              >
+                Desktop Computers
+              </div>
+              <div
+                className="p-2 hover:bg-gray-100"
+                onClick={() => navigate.push("/shop?category=Laptops")}
+              >
+                Laptops
+              </div>
+              <div
+                className="p-2 hover:bg-gray-100"
+                onClick={() => navigate.push("/shop?category=Tablets")}
+              >
+                Tablets
+              </div>
+              <div
+                className="p-2 hover:bg-gray-100"
+                onClick={() => navigate.push("/shop?category=Monitors")}
+              >
+                Monitors
+              </div>
+              <div
+                className="p-2 hover:bg-gray-100"
+                onClick={() =>
+                  navigate.push("/shop?category=Storage%20Devices")
+                }
+              >
+                Storage Devices
+              </div>
+              <div
+                className="p-2 hover:bg-gray-100"
+                onClick={() => navigate.push("/shop?category=Input%20Devices")}
+              >
+                Input Devices
+              </div>
+              <div
+                className="p-2 hover:bg-gray-100"
+                onClick={() => navigate.push("/shop?category=Output%20Devices")}
+              >
+                Output Devices
+              </div>
+              <div
+                className="p-2 hover:bg-gray-100"
+                onClick={() =>
+                  navigate.push("/shop?category=Networking%20Equipment")
+                }
+              >
+                Networking Equipment
+              </div>
+              <div
+                className="p-2 hover:bg-gray-100"
+                onClick={() => navigate.push("/shop?category=Components")}
+              >
+                Components
+              </div>
+              <div
+                className="p-2 hover:bg-gray-100"
+                onClick={() => navigate.push("/shop?category=Peripherals")}
+              >
+                Peripherals
+              </div>
+              <div
+                className="p-2 hover:bg-gray-100"
+                onClick={() => navigate.push("/shop?category=Software")}
+              >
+                Software
+              </div>
             </div>
           )}
         </div>
@@ -121,30 +182,352 @@ const Navbar = () => {
               Shop By Brands <ExpandMoreIcon />
             </span>
             {isDropdownOpen && (
-              <div className="absolute bg-white shadow-md rounded-lg mt-5 top-0 w-48">
-                <div
-                  className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
-                  onClick={() => navigate.push("/shop")}
-                >
-                  AMD
+              <div
+                className="absolute z-30 bg-white shadow-md rounded-lg mt-5 top-0 lg:-left-40 -left-80 text-base p-6 w-fit flex gap-4 lg:gap-20 font-medium text-black"
+                onMouseEnter={() => setIsDropdownOpen(true)}
+                onMouseLeave={() => setIsDropdownOpen(false)}
+              >
+                <div className="flex flex-col gap-5">
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">AMD</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 3
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 5
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 7
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 9
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Ryzen Threadripper
+                    </span>
+                  </div>
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">Deep cool</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Cabinet
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      CPU Cooler
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Power Supply
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Cabinet paste
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Thermal fan
+                    </span>
+                  </div>
                 </div>
-                <div
-                  className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
-                  onClick={() => navigate.push("/shop")}
-                >
-                  Ant Esports
+                <div className="flex flex-col gap-5">
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">Ant Esports</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Cabinet
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      SSD
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Speakers
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Motherboard
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Power Supply
+                    </span>
+                  </div>
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">Intel</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Core I3 processor
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Core I5 processor
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Core I7 processor
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Core I9 processor
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Intel graphic card
+                    </span>
+                  </div>
                 </div>
-                <div
-                  className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
-                  onClick={() => navigate.push("/shop")}
-                >
-                  Deepcool
+                <div className="flex flex-col gap-5">
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">AMD</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 3
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 5
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 7
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 9
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Ryzen Threadripper
+                    </span>
+                  </div>
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">AMD Generation</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      7000 series
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      5000 series
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      4000 series
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      3000 series
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      2000 series
+                    </span>
+                  </div>
                 </div>
-                <div
-                  className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
-                  onClick={() => navigate.push("/shop")}
-                >
-                  Corsair
+                <div className="flex flex-col gap-5">
+                  {" "}
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">Ant Esports</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Cabinet
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      SSD
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Speakers
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Motherboard
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Power Supply
+                    </span>
+                  </div>
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">AMD</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 3
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 5
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 7
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 9
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Ryzen Threadripper
+                    </span>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-5">
+                  {" "}
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">Intel</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Core I3 processor
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Core I5 processor
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Core I7 processor
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Core I9 processor
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Intel graphic card
+                    </span>
+                  </div>
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">Deep cool</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Cabinet
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      CPU Cooler
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Power Supply
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Cabinet paste
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Thermal fan
+                    </span>
+                  </div>
                 </div>
               </div>
             )}
@@ -159,30 +542,352 @@ const Navbar = () => {
               Accessories <ExpandMoreIcon />
             </span>
             {isAccessoriesOpen && (
-              <div className="absolute bg-white shadow-md rounded-lg mt-1 w-48 z-30">
-                <div
-                  className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
-                  onClick={() => navigate.push("/shop")}
-                >
-                  RAM
+              <div
+                className="absolute z-30 bg-white shadow-md rounded-lg mt-5 top-0 lg:-left-60 -left-[29rem] overflow-x-auto max-w-screen text-base p-6 w-fit flex gap-4 lg:gap-20 font-medium text-black"
+                onMouseEnter={() => setIsAccessoriesOpen(true)}
+                onMouseLeave={() => setIsAccessoriesOpen(false)}
+              >
+                <div className="flex flex-col gap-5">
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">AMD</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 3
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 5
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 7
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 9
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Ryzen Threadripper
+                    </span>
+                  </div>
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">Deep cool</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Cabinet
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      CPU Cooler
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Power Supply
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Cabinet paste
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Thermal fan
+                    </span>
+                  </div>
                 </div>
-                <div
-                  className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
-                  onClick={() => navigate.push("/shop")}
-                >
-                  CPU
+                <div className="flex flex-col gap-5">
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">Ant Esports</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Cabinet
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      SSD
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Speakers
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Motherboard
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Power Supply
+                    </span>
+                  </div>
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">Intel</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Core I3 processor
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Core I5 processor
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Core I7 processor
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Core I9 processor
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Intel graphic card
+                    </span>
+                  </div>
                 </div>
-                <div
-                  className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
-                  onClick={() => navigate.push("/shop")}
-                >
-                  Harddisk
+                <div className="flex flex-col gap-5">
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">AMD</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 3
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 5
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 7
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 9
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Ryzen Threadripper
+                    </span>
+                  </div>
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">AMD Generation</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      7000 series
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      5000 series
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      4000 series
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      3000 series
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      2000 series
+                    </span>
+                  </div>
                 </div>
-                <div
-                  className="p-2 hover:bg-gray-100 cursor-pointer font-semibold"
-                  onClick={() => navigate.push("/shop")}
-                >
-                  SSD
+                <div className="flex flex-col gap-5">
+                  {" "}
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">Ant Esports</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Cabinet
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      SSD
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Speakers
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Motherboard
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Power Supply
+                    </span>
+                  </div>
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">AMD</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 3
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 5
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 7
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      AMD Ryzen 9
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Ryzen Threadripper
+                    </span>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-5">
+                  {" "}
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">Intel</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Core I3 processor
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Core I5 processor
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Core I7 processor
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Core I9 processor
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Intel graphic card
+                    </span>
+                  </div>
+                  <div className="flex gap-3 flex-col">
+                    <span className="font-semibold  pb-2">Deep cool</span>
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Cabinet
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      CPU Cooler
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Power Supply
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Cabinet paste
+                    </span>{" "}
+                    <span
+                      className="cursor-pointer text-gray-600 w-full text-start text-nowrap"
+                      onClick={() => navigate.push("/shop")}
+                    >
+                      Thermal fan
+                    </span>
+                  </div>
                 </div>
               </div>
             )}
