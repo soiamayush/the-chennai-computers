@@ -107,7 +107,7 @@ const BillingComponent: React.FC = () => {
           name: "The chennai computers",
           description: "Transaction Description",
           image:
-            "hhttps://res.cloudinary.com/dffjppnlr/image/upload/v1719860388/weoioqbvlcrgq64j5mhm.png",
+            "https://res.cloudinary.com/dffjppnlr/image/upload/v1719860388/weoioqbvlcrgq64j5mhm.png",
           order_id: paymentInfo.id,
           handler: function (response: any) {
             saveOrder();
