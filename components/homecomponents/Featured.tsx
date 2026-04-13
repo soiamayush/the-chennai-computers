@@ -242,7 +242,7 @@ const Featured = () => {
             src={bannerimg}
             alt=""
             className="mt-8 z-10 w-1/2 hidden md:flex"
-          />
+           priority />
 
           <button
             onClick={() => router.push("/shop")}
